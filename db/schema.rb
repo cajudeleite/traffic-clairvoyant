@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2021_08_30_191246) do
   create_table "trajetos", force: :cascade do |t|
     t.bigint "viagem_id", null: false
     t.bigint "percurso_id", null: false
+    t.float "tempo_de_percurso"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["percurso_id"], name: "index_trajetos_on_percurso_id"
@@ -46,6 +47,7 @@ ActiveRecord::Schema.define(version: 2021_08_30_191246) do
     t.string "destino"
     t.integer "data"
     t.integer "horario"
+    t.float "tempo_total"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

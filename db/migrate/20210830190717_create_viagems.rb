@@ -5,6 +5,7 @@ class CreateViagems < ActiveRecord::Migration[6.0]
       t.string :destino
       t.integer :data
       t.integer :horario
+      t.float :tempo_total
       t.references :user, null: false, foreign_key: true
 
       t.timestamps
