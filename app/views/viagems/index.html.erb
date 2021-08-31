@@ -1,1 +1,7 @@
-<h1>helllo</h1>
+<h1>Nova viagem</h1>
+
+<%= simple_form_for @viagem, url: api_path(@viagem), method: :post do |f|  %>
+<%= f.input :origem %>
+<%= f.input :destino %>
+<%= f.submit %>
+<% end %>
