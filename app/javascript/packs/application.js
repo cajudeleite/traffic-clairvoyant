@@ -26,7 +26,7 @@ require("channels")
 
 // External imports
 import { scrollListen } from './scroll'
-
+import { requestFromApi } from './weatherAPI'
 
 
 
@@ -36,4 +36,6 @@ document.addEventListener('turbolinks:load', () => {
   // Call your JS functions here
   initUpdateNavbarOnScroll();
   scrollListen();
+  requestFromApi('Ubatuba');
+
 });
