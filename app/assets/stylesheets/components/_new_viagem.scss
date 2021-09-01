@@ -1,0 +1,16 @@
+.new-viagem {
+  background-color: $light-gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  .container {
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+  }
+  h1 {
+    justify-content: center;
+    text-align: center;
+  }
+}
