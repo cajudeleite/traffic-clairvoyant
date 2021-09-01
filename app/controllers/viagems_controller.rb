@@ -5,13 +5,13 @@ class ViagemsController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
 
   def index
-    @viagens = Viagem.all.where("user_id = #{current_user.id}")
-    @viagem = Viagem.new
+    @viagems = Viagem.all.where("user_id = #{current_user.id}")
+    redirect_to 'viagems/new' if @viagems
   end
 
-  # def new
-  #   create
-  # end
+  def new
+    @viagem = Viagem.new
+  end
 
   def create
     @viagem = Viagem.new(viagem_params)
