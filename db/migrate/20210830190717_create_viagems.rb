@@ -3,7 +3,7 @@ class CreateViagems < ActiveRecord::Migration[6.0]
     create_table :viagems do |t|
       t.string :origem
       t.string :destino
-      t.integer :data
+      t.date :data
       t.integer :horario
       t.float :tempo_total
       t.references :user, null: false, foreign_key: true

@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2021_08_30_191246) do
   create_table "viagems", force: :cascade do |t|
     t.string "origem"
     t.string "destino"
-    t.integer "data"
+    t.date "data"
     t.integer "horario"
     t.float "tempo_total"
     t.bigint "user_id", null: false
