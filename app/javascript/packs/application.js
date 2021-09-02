@@ -32,6 +32,7 @@ import "bootstrap";
 //import { requestFromApi } from './weatherAPI'
 import { initUpdateNavbarOnScroll } from '../components/navbar';
 //import { switchTheme } from './darktheme';
+import { weatherAPI } from './weatherAPI';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
@@ -41,4 +42,5 @@ document.addEventListener('turbolinks:load', () => {
   //switchTheme();
   //scrollListen();
   //requestFromApi('Ubatuba');
+  weatherAPI();
 });
