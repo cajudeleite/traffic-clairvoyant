@@ -27,16 +27,18 @@ require("channels")
 // External imports
 
 import "bootstrap";
-import { initAutocomplete } from "./autocomplete";
-//import { scrollListen } from './scroll'
+//import { initAutocomplete } from "./autocomplete";
+import { scrollListen } from './scroll'
 //import { requestFromApi } from './weatherAPI'
 import { initUpdateNavbarOnScroll } from '../components/navbar';
+//import { switchTheme } from './darktheme';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
-  initAutocomplete();
+  //initAutocomplete();
   initUpdateNavbarOnScroll();
-  //scrollListen();
+  //switchTheme();
+  scrollListen();
   //requestFromApi('Ubatuba');
 });

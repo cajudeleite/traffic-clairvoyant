@@ -1,12 +1,11 @@
 .new-viagem {
-  background-color: $cameo;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
-  color: $zodiac;
+  background-color: var(--bg-color);
   .btn {
-    background-color: $zodiac;
+    background-color: var(--color);
     color: $light-gray;
     width: 40%;
     font-size: 20px;
