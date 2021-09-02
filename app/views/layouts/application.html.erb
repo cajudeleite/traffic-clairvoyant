@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html style='height: 100%;'>
+<html style='height: 100%;' data-theme='light'>
   <head>
-    <title>Traffic Clairvoyant - transito ubatuba</title>
+    <title>Traffic Clairvoyant</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -21,8 +21,6 @@
   <body>
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
-    <div class="container">
-      <%= yield %>
-    </div>
+    <%= yield %>
   </body>
 </html>
