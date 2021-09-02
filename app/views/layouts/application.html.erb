@@ -7,10 +7,13 @@
 
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300&family=Didact+Gothic&family=Rokkitt:wght@100;300&display=swap" rel="stylesheet">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['MAPS_API_KEY']%>&libraries=places&callbacks=initAutocomplete" defer></script>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload', defer: true %>
     <%= include_gon %>
   </head>

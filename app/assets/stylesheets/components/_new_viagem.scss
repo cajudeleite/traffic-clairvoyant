@@ -1,9 +1,17 @@
 .new-viagem {
-  background-color: $light-gray;
+  background-color: $cameo;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
+  color: $zodiac;
+  .btn {
+    background-color: $zodiac;
+    color: $light-gray;
+    width: 40%;
+    font-size: large;
+    font-family: 'Cairo', sans-serif;
+  }
   .container {
     align-items: center;
     justify-content: center;
@@ -12,5 +20,6 @@
   h1 {
     justify-content: center;
     text-align: center;
+    font-size: xx-large;
   }
 }
