@@ -28,7 +28,7 @@ require("channels")
 
 import "bootstrap";
 //import { initAutocomplete } from "./autocomplete";
-import { scrollListen } from './scroll'
+//import { scrollListen } from './scroll'
 //import { requestFromApi } from './weatherAPI'
 import { initUpdateNavbarOnScroll } from '../components/navbar';
 //import { switchTheme } from './darktheme';
@@ -39,6 +39,6 @@ document.addEventListener('turbolinks:load', () => {
   //initAutocomplete();
   initUpdateNavbarOnScroll();
   //switchTheme();
-  scrollListen();
+  //scrollListen();
   //requestFromApi('Ubatuba');
 });
