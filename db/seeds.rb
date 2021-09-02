@@ -3,5 +3,220 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+#   movies = Movie.create([{ name: "Star Wars' }, { name: 'Lord of the Rings" }])
+#   Character.create(name: "Luke", movie: movies.first)
+
+
+
+
+## SEEDS > VIAGENS PARA UBATUBA
+
+## Estradas
+puts "seeding roads..."
+roads = %w[SP070 SP125 SP099 BR101 SP065]
+directions = %w[C P]
+roads.each do |road|
+  directions.each do |direction|
+    new_road = Road.new(name:road, direction: direction)
+    new_road.save!
+  end
+end
+
+## Origens
+puts "seeding origins..."
+origins = ['Sao Paulo', 'Suzano', 'Sao Jose dos Campos', 'Campinas', 'Taubate']
+origins.each do |origin|
+  new_origin = Origin.new(name: origin)
+  new_origin.save!
+end
+
+## Destinos
+puts "seeding destinations..."
+destinations = ["Ubatuba"]
+destinations.each do |destination|
+  new_destination = Destination.new(name: destination)
+  new_destination.save!
+end
+
+## origin_destination_routes
+
+puts "seeding routes"
+# SP - Ubatuba
+puts "1"
+origin = Origin.where("name = 'Sao Paulo'").first
+destination = Destination.where("name = 'Ubatuba'").first
+name = "SP070 + SP125"
+new_origin_destination_route = OriginDestinationRoute.new(origin_id: origin.id, destination_id: destination.id, name: name)
+new_origin_destination_route.save!
+
+puts "2"
+## ROTAS
+road = Road.where("name = 'SP070' and direction = 'P'").first
+rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 1, duration: 60)
+rota.save!
+
+puts "3"
+road = Road.where("name = 'SP125' and direction = 'P'").first
+rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 2, duration: 60)
+rota.save!
+
+
+
+
+puts "4"
+origin = Origin.where("name = 'Sao Paulo'").first
+destination = Destination.where("name = 'Ubatuba'").first
+name = "SP070 + SP099 + BR101"
+new_origin_destination_route = OriginDestinationRoute.new(origin_id: origin.id, destination_id: destination.id, name: name)
+new_origin_destination_route.save!
+
+## ROTAS
+road = Road.where("name = 'SP070' and direction = 'P'").first
+rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 1, duration: 60)
+rota.save!
+
+road = Road.where("name = 'SP099' and direction = 'P'").first
+rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 2, duration: 60)
+rota.save!
+
+road = Road.where("name = 'BR101' and direction = 'P'").first
+rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 3, duration: 60)
+rota.save!
+
+
+
+
+puts "5"
+# Suzano - Ubatuba
+origin = Origin.where("name = 'Suzano'").first
+destination = Destination.where("name = 'Ubatuba'").first
+name = "SP070 + SP125"
+new_origin_destination_route = OriginDestinationRoute.new(origin_id: origin.id, destination_id: destination.id, name: name)
+new_origin_destination_route.save!
+
+## ROTAS
+road = Road.where("name = 'SP070' and direction = 'P'").first
+rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 1, duration: 60)
+rota.save!
+
+road = Road.where("name = 'SP125' and direction = 'P'").first
+rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 2, duration: 60)
+rota.save!
+
+
+
+
+puts "6"
+origin = Origin.where("name = 'Suzano'").first
+destination = Destination.where("name = 'Ubatuba'").first
+name = "SP070 + SP099 + BR101"
+new_origin_destination_route = OriginDestinationRoute.new(origin_id: origin.id, destination_id: destination.id, name: name)
+new_origin_destination_route.save!
+
+
+## ROTAS
+road = Road.where("name = 'SP099' and direction = 'P'").first
+rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 1, duration: 60)
+rota.save!
+
+road = Road.where("name = 'BR101' and direction = 'P'").first
+rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 2, duration: 60)
+rota.save!
+
+
+puts "6"
+# Sao Jose dos Campos - Ubatuba
+origin = Origin.where("name = 'Sao Jose dos Campos'").first
+destination = Destination.where("name = 'Ubatuba'").first
+name = "SP070 + SP099"
+new_origin_destination_route = OriginDestinationRoute.new(origin_id: origin.id, destination_id: destination.id, name: name)
+new_origin_destination_route.save!
+
+## ROTAS
+road = Road.where("name = 'SP070' and direction = 'P'").first
+rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 1, duration: 60)
+rota.save!
+
+road = Road.where("name = 'SP099' and direction = 'P'").first
+rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 2, duration: 60)
+rota.save!
+
+
+
+
+
+puts "7"
+origin = Origin.where("name = 'Sao Jose dos Campos'").first
+destination = Destination.where("name = 'Ubatuba'").first
+name = "SP099 + BR101"
+new_origin_destination_route = OriginDestinationRoute.new(origin_id: origin.id, destination_id: destination.id, name: name)
+new_origin_destination_route.save!
+
+## ROTAS
+road = Road.where("name = 'SP099' and direction = 'P'").first
+rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 1, duration: 60)
+rota.save!
+
+road = Road.where("name = 'BR101' and direction = 'P'").first
+rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 2, duration: 60)
+rota.save!
+
+
+puts "8"
+# Taubate - 'Ubatuba'
+origin = Origin.where("name = 'Taubate'").first
+destination = Destination.where("name = 'Ubatuba'").first
+name = "SP125"
+new_origin_destination_route = OriginDestinationRoute.new(origin_id: origin.id, destination_id: destination.id, name: name)
+new_origin_destination_route.save!
+
+## ROTAS
+road = Road.where("name = 'SP125' and direction = 'P'").first
+rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 1, duration: 60)
+rota.save!
+
+
+# USER
+puts 'user....'
+user = User.new(email: 'a@a.com' )
+user.password = '123456'
+user.encrypted_password = '123456'
+user.save!
+
+
+# VIAGENS
+puts 'viagens...'
+horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]
+i = 0
+5000.times do
+  puts i
+  trip = Trip.new()
+  trip.origin_destination_routes_id = OriginDestinationRoute.all.sample.id
+  trip.time = horarios.sample
+  trip.date = DateTime.current.to_date
+  trip.user = User.first
+  puts trip.origin_destination_routes_id
+  trip.save!
+end
+
+day = DateTime.current.to_date
+roads_hash = {}
+horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]
+
+Road.all.each do |road|
+  horarios.each do |horario|
+    road_car = RoadCar.new
+    road_car.day = day
+    road_car.time = horario
+    road_car.road = road
+    road_car.number_of_cars = 0
+    trips_horario = Trip.all.where("time = #{horario} and date = '#{day}'")
+    trips_horario.each do |trip|
+      trip.origin_destination_routes.routes.where("road_id = #{road.id}").each do |route|
+        road_car.number_of_cars += 1
+      end
+    end
+  road_car.save!
+  end
+
+end

@@ -1,0 +1,6 @@
+<%= simple_form_for @trip do |f| %>
+  <%= simple_fields_for :other do |o| %>
+    <%= o.input :origin, collection: Origin.all %>
+    <%= o.input :destination, collection: Destination.all %>
+  <% end %>
+<% end  %>
