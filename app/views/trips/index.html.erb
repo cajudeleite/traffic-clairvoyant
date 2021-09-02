@@ -1,1 +1,9 @@
-<h1>TRIPS PAGE</h1>
+<h1>Where are you going?</h1>
+
+
+<%= simple_form_for :new_trip, url: trips_info_path, method: :get do |f| %>
+<%= f.input :origin, collection: Origin.all %>
+<%= f.input :destination, collection: Destination.all %>
+<%= f.input :day, as: :date %>
+<%= f.submit %>
+<% end%>

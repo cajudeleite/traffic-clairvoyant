@@ -188,14 +188,13 @@ user.save!
 puts 'viagens...'
 horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]
 i = 0
-5000.times do
-  puts i
+100.times do
   trip = Trip.new()
   trip.origin_destination_routes_id = OriginDestinationRoute.all.sample.id
   trip.time = horarios.sample
   trip.date = DateTime.current.to_date
   trip.user = User.first
-  puts trip.origin_destination_routes_id
+  # puts trip.origin_destination_routes_id
   trip.save!
 end
 
@@ -203,6 +202,7 @@ day = DateTime.current.to_date
 roads_hash = {}
 horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]
 
+puts 'cars'
 Road.all.each do |road|
   horarios.each do |horario|
     road_car = RoadCar.new
@@ -217,6 +217,7 @@ Road.all.each do |road|
       end
     end
   road_car.save!
+  puts road_car.id
   end
 
 end
@@ -243,4 +244,3 @@ end
 #
 #
 #puts 'Finished!'
-
