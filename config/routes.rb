@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :trips, only: [:index, :new, :create]
   resources :viagems
   get 'trips/info', to: 'trips#info'
+  get 'my_trips', to: 'trips#mytrips'
   post 'maps_api', to: 'viagems#maps_api', as: :api
 
 end
