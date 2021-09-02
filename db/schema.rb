@@ -10,14 +10,66 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_30_191246) do
+ActiveRecord::Schema.define(version: 2021_09_01_184956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "destinations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "origin_destination_routes", force: :cascade do |t|
+    t.bigint "origin_id", null: false
+    t.bigint "destination_id", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["destination_id"], name: "index_origin_destination_routes_on_destination_id"
+    t.index ["origin_id"], name: "index_origin_destination_routes_on_origin_id"
+  end
+
+  create_table "origins", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "percursos", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "road_cars", force: :cascade do |t|
+    t.bigint "road_id", null: false
+    t.string "time"
+    t.integer "number_of_cars"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.date "day"
+    t.index ["road_id"], name: "index_road_cars_on_road_id"
+  end
+
+  create_table "roads", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.string "stretch"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "direction"
+  end
+
+  create_table "routes", force: :cascade do |t|
+    t.bigint "road_id", null: false
+    t.bigint "origin_destination_route_id", null: false
+    t.integer "step"
+    t.integer "duration"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["origin_destination_route_id"], name: "index_routes_on_origin_destination_route_id"
+    t.index ["road_id"], name: "index_routes_on_road_id"
   end
 
   create_table "trajetos", force: :cascade do |t|
@@ -28,6 +80,17 @@ ActiveRecord::Schema.define(version: 2021_08_30_191246) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["percurso_id"], name: "index_trajetos_on_percurso_id"
     t.index ["viagem_id"], name: "index_trajetos_on_viagem_id"
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.date "date"
+    t.float "time"
+    t.bigint "user_id", null: false
+    t.bigint "origin_destination_routes_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["origin_destination_routes_id"], name: "index_trips_on_origin_destination_routes_id"
+    t.index ["user_id"], name: "index_trips_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -54,7 +117,14 @@ ActiveRecord::Schema.define(version: 2021_08_30_191246) do
     t.index ["user_id"], name: "index_viagems_on_user_id"
   end
 
+  add_foreign_key "origin_destination_routes", "destinations"
+  add_foreign_key "origin_destination_routes", "origins"
+  add_foreign_key "road_cars", "roads"
+  add_foreign_key "routes", "origin_destination_routes"
+  add_foreign_key "routes", "roads"
   add_foreign_key "trajetos", "percursos"
   add_foreign_key "trajetos", "viagems"
+  add_foreign_key "trips", "origin_destination_routes", column: "origin_destination_routes_id"
+  add_foreign_key "trips", "users"
   add_foreign_key "viagems", "users"
 end
