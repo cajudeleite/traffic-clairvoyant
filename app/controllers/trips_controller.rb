@@ -21,6 +21,12 @@ class TripsController < ApplicationController
     trip.date = date
     trip.user = current_user
     if trip.save
+      #Salvar a viagem de carro
+      @odr.roads.each do |road|
+        road_car = RoadCar.where("road_id = #{road.id} and time = '#{params[:trip]['time']}'").first
+        road_car.number_of_cars += 1
+        road_car.save
+      end
       redirect_to trips_path
     else
 
@@ -54,6 +60,10 @@ class TripsController < ApplicationController
   end
 
   def show
+  end
+
+  def mytrips
+    @trips = Trip.all.where("user_id = #{current_user.id}")
   end
 
   private

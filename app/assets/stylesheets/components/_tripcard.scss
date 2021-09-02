@@ -1,0 +1,10 @@
+.trips-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.trip-card {
+  width: 200px;
+  margin: 20px;
+  border: 1px solid black;
+}

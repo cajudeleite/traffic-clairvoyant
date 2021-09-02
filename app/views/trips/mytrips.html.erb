@@ -1,0 +1,16 @@
+
+<h1 class="text-center">My Trips</h1>
+
+
+<div class="container">
+  <div class="trips-flex">
+    <% @trips.each do |trip| %>
+    <div class="trip-card">
+        <p><%= trip.date %></p>
+        <p><%= trip.time %></p>
+        <a href="">check road transit</a>
+        <a href="">cancel trip</a>
+    </div>
+        <% end  %>
+  </div>
+</div>
