@@ -33,6 +33,11 @@ p {
   font-family: 'Didact Gothic', sans-serif;
 }
 
+label {
+  font-family: 'Didact Gothic', sans-serif;
+  color: var(--color);
+}
+
 [data-theme='light'] {
   --bg-color: #F0DDBC;
   --color: #3A4257;
