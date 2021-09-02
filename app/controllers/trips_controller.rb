@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  skip_before_action :authenticate_user!
+  # skip_before_action :authenticate_user!
 
   def index
     @trip = Trip.new()
@@ -7,6 +7,24 @@ class TripsController < ApplicationController
 
   def new
     @trip = Trip.new()
+    raise
+  end
+
+  def create
+    @year = params[:trip]["date(1i)"]
+    @month = params[:trip]["date(2i)"]
+    @day = params[:trip]["date(3i)"]
+    @odr = OriginDestinationRoute.find(params[:trip]["origin_destination_routes"])
+    date = DateTime.new(@year.to_i, @month.to_i, @day.to_i).to_date
+    trip = Trip.new(trip_params)
+    trip.origin_destination_routes = @odr
+    trip.date = date
+    trip.user = current_user
+    if trip.save
+      redirect_to trips_path
+    else
+
+    end
   end
 
   def info
@@ -30,8 +48,17 @@ class TripsController < ApplicationController
     @graph_data = roads_hash
     gon.graph_data = @graph_data
     # raise
+
+    @trip = Trip.new()
+    @trip.date = DateTime.new(@year.to_i, @month.to_i, @day.to_i).to_date
   end
 
   def show
+  end
+
+  private
+
+  def trip_params
+    params.require(:trip).permit(:time, "date(1i)", "date(2i)", "date(3i)")
   end
 end
