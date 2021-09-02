@@ -1,4 +1,4 @@
-.new-viagem {
+.login-signup {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,17 +7,16 @@
     background-color: var(--color);
     color: $light-gray;
     width: 40%;
-    font-size: 20px;
+    font-size: 15px;
     font-family: 'Cairo', sans-serif;
   }
   .container {
     align-items: center;
     justify-content: center;
-    height: fit-content;
   }
   h1 {
     justify-content: center;
     text-align: center;
-    font-size: 70px;
+    font-size: 60px;
   }
 }
