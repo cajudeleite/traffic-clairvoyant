@@ -60,7 +60,7 @@
         data_array = [];
         graph_data = gon.graph_data[road];
         for (var key in graph_data) {
-          array = [key, graph_data[key]];
+          array = [key, graph_data[key]*10];
           data_array.push(array);
         }
         data.addRows(data_array);

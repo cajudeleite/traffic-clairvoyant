@@ -43,7 +43,7 @@ class TripsController < ApplicationController
         road_car.number_of_cars += 1
         road_car.save
       end
-      redirect_to trips_path
+      redirect_to my_trips_path
     else
       # flash.now[:alert] = 'Failed!'
       # redirect_to trips_info_path(:params[:trip])
@@ -103,10 +103,10 @@ class TripsController < ApplicationController
   end
 
 
-  def delete
-    @trip = Trip.find[:id]
+  def destroy
+    @trip = Trip.find(params[:id])
     @trip.delete
-    rediret_to my_trips_path
+    redirect_to my_trips_path
   end
   private
 
