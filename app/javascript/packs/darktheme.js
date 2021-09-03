@@ -9,4 +9,4 @@ const switchTheme = (x) => {
     toggleSwitch.addEventListener('change', switchFunction, false)
   }
 
-export { initAutocomplete }
+export { switchTheme }
