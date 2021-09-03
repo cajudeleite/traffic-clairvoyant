@@ -188,7 +188,7 @@ user.save!
 puts 'viagens...'
 horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]
 i = 0
-100.times do
+500.times do
   trip = Trip.new()
   trip.origin_destination_routes_id = OriginDestinationRoute.all.sample.id
   trip.time = horarios.sample
@@ -207,7 +207,7 @@ Road.all.each do |road|
   horarios.each do |horario|
     road_car = RoadCar.new
     road_car.day = day
-    road_car.time = horario
+    road_car.time = horario.to_f
     road_car.road = road
     road_car.number_of_cars = 0
     trips_horario = Trip.all.where("time = #{horario} and date = '#{day}'")

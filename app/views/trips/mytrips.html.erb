@@ -8,8 +8,8 @@
     <div class="trip-card">
         <p><%= trip.date %></p>
         <p><%= trip.time %></p>
-        <%= link_to 'check road transit', trips_info_path, new_trip: {origin: trip.origin_destination_routes.origin}  %>
-        <%= link_to 'cancel trip', trips_info_path  %>
+        <%= link_to 'check trip', trip_path(trip) %>
+        <%= link_to 'cancel trip', trip_path(trip), method: :delete, data: {confirm: "Are you sure?"}, remote: true  %>
     </div>
         <% end  %>
   </div>
