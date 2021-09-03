@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_01_184956) do
+ActiveRecord::Schema.define(version: 2021_09_03_154639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,18 +37,13 @@ ActiveRecord::Schema.define(version: 2021_09_01_184956) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "percursos", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "road_cars", force: :cascade do |t|
     t.bigint "road_id", null: false
-    t.string "time"
     t.integer "number_of_cars"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.date "day"
+    t.float "time"
     t.index ["road_id"], name: "index_road_cars_on_road_id"
   end
 
@@ -70,16 +65,6 @@ ActiveRecord::Schema.define(version: 2021_09_01_184956) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["origin_destination_route_id"], name: "index_routes_on_origin_destination_route_id"
     t.index ["road_id"], name: "index_routes_on_road_id"
-  end
-
-  create_table "trajetos", force: :cascade do |t|
-    t.bigint "viagem_id", null: false
-    t.bigint "percurso_id", null: false
-    t.float "tempo_de_percurso"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["percurso_id"], name: "index_trajetos_on_percurso_id"
-    t.index ["viagem_id"], name: "index_trajetos_on_viagem_id"
   end
 
   create_table "trips", force: :cascade do |t|
@@ -105,26 +90,11 @@ ActiveRecord::Schema.define(version: 2021_09_01_184956) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "viagems", force: :cascade do |t|
-    t.string "origem"
-    t.string "destino"
-    t.date "data"
-    t.integer "horario"
-    t.float "tempo_total"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_viagems_on_user_id"
-  end
-
   add_foreign_key "origin_destination_routes", "destinations"
   add_foreign_key "origin_destination_routes", "origins"
   add_foreign_key "road_cars", "roads"
   add_foreign_key "routes", "origin_destination_routes"
   add_foreign_key "routes", "roads"
-  add_foreign_key "trajetos", "percursos"
-  add_foreign_key "trajetos", "viagems"
   add_foreign_key "trips", "origin_destination_routes", column: "origin_destination_routes_id"
   add_foreign_key "trips", "users"
-  add_foreign_key "viagems", "users"
 end
