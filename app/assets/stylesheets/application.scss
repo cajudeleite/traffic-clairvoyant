@@ -10,9 +10,11 @@
 
 // Your CSS partials
 @import "components/index";
+@import "components/tvnavbar";
 @import "components/tripcard";
 @import "pages/index";
 @import "pages/info";
+@import "components/charts";
 
 $edcolor: red;
 

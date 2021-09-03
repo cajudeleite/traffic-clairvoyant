@@ -5,4 +5,11 @@
   color: $light-gray;
   text-align: center;
   padding-top: 50vh;
+    a{
+    color: var(--color);
+    text-decoration: none;
+  }
+  h1:hover {
+    font-weight: bolder;
+  }
 }

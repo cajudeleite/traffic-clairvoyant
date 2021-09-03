@@ -1,0 +1,9 @@
+<div class='text-right tvnavbar'>
+  <% if user_signed_in? %>
+    <%= link_to 'log out', destroy_user_session_path  %>
+    <%= link_to  'my trips', my_trips_path %>
+  <% else %>
+    <%= link_to 'login', new_user_session %>
+    <%= link_to 'sign up', user_session %>
+  <% end  %>
+</div>

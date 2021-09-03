@@ -1,3 +1,4 @@
+    <%= render "shared/tvnavbar" %>
 
     <div class="container">
       <div class="row">
@@ -22,6 +23,8 @@
     </div>
 
 
+
+<div class="container">
 <h2 class="text-center"> Here are your options</h2>
     <script type="text/javascript">
 
@@ -64,8 +67,19 @@
 
         // Set chart options
         var options = {'title':road,
-                       'width':800,
+                       'width':500,
                        'height':300,
+                        vAxis: {
+                           gridlines: {
+                               color: 'transparent',
+                               interval: 0
+                           }
+
+                       },
+                                               animation: {
+                                                 startup: true,
+                          duration: 3000
+                        }
         }
 
         elements = document.querySelectorAll(`.chart_div_${road}`)
@@ -78,16 +92,22 @@
       }
     </script>
 <div class="text-center">
+
   <% @origin_destination_routes.each do |odr| %>
+
     <h2 class="text-center"><%= odr.name %></h2>
+             <div class="charts-flex">
     <% @graph_data.each do |key, value| %>
     <% roads = []  %>
     <% odr.roads.each do |road| roads << road.name end%>
       <% if roads.include? key.to_s  %>
-        <div class="gchart chart_div_<%=key.to_s%> mb-4"></div>
+          <div class="gchart chart_div_<%=key.to_s%> m-4"></div>
       <% end %>
+
     <% end %>
+              </div>
   <% end %>
+
 </div>
 
 <h1 class="text-center">Choose your road options and departure time</h1>
@@ -98,4 +118,5 @@
   <%= f.input :date, readonly: true %>
   <%= f.submit %>
   <% end %>
+</div>
 </div>
