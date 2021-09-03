@@ -23,6 +23,9 @@ class TripsController < ApplicationController
       new_road_car.number_of_cars += 1
       new_road_car.save
     end
+    # raise
+    @trip.time = params[:trip]["time"].to_f
+    @trip.save
     redirect_to my_trips_path
   end
 
@@ -107,6 +110,7 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:id])
     @trip.delete
     redirect_to my_trips_path
+    flash.now[:alert] = 'Trip Cancelled!'
   end
   private
 
