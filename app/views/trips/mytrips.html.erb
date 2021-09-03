@@ -1,17 +1,20 @@
 <%= render "shared/tvnavbar" %>
-<h1 class="text-center">My Trips</h1>
-
-
+<h1 class="text-center py-3" style='font-size: 60px;'>My Trips</h1>
 <div class="container">
   <div class="trips-flex">
     <% @trips.each do |trip| %>
-    <div class="trip-card">
-        <p><%= trip.date %></p>
-        <p><%= trip.time %></p>
-        <%= link_to 'check trip', trip_path(trip) %>
-        <%= link_to 'cancel trip', trip_path(trip), method: :delete, data: {confirm: "Are you sure?"}, remote: true  %>
-    </div>
-        <% end  %>
+      <div class="trip-card">
+        <h2 class='text-center pt-3'><%= trip.origin_destination_routes.name %></h2>
+        <div class="d-flex justify-content-around py-3">
+          <p>Date: <%= trip.date %></p>
+          <p>Time: <%= trip.time %></p>
+        </div>
+        <div class="d-flex justify-content-around pb-3">
+          <%= link_to 'check trip', trip_path(trip) %>
+          <%= link_to 'cancel trip', trip_path(trip), method: :delete, data: {confirm: "Are you sure?"}, remote: true  %>
+        </div>
+      </div>
+    <% end  %>
   </div>
 </div>
 

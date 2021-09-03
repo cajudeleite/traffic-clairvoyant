@@ -2,8 +2,6 @@
 
 
 <div class="container">
-<h2 class="text-center"> INFO </h2>
-<h2 class="text-center"><%= @trip.time %>h</h2>
     <script type="text/javascript">
 
       // Load the Visualization API and the corechart package.
@@ -69,10 +67,11 @@
         }
       }
     </script>
-<div class="text-center">
+<div class="text-center pt-3">
 
 
     <h2 class="text-center"><%= @odr.name %></h2>
+    <h2 class="text-center"><%= @trip.time %>h</h2>
              <div class="charts-flex">
     <% @graph_data.each do |key, value| %>
     <% roads = []  %>
