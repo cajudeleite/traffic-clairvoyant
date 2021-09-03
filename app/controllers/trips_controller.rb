@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :new, :info]
+  skip_before_action :authenticate_user!, only: [:index]
 
   def index
     @trip = Trip.new()
