@@ -8,9 +8,18 @@
     <div class="trip-card">
         <p><%= trip.date %></p>
         <p><%= trip.time %></p>
-        <a href="">check road transit</a>
-        <a href="">cancel trip</a>
+        <%= link_to 'check road transit', trips_info_path, new_trip: {origin: trip.origin_destination_routes.origin}  %>
+        <%= link_to 'cancel trip', trips_info_path  %>
     </div>
         <% end  %>
   </div>
 </div>
+
+
+
+
+    <%# @origin = params[:new_trip][:origin]
+    @destination = params[:new_trip][:destination]
+    @year = params[:new_trip]["day(1i)"]
+    @month = params[:new_trip]["day(2i)"]
+    @day = params[:new_trip]["day(3i)"] %>
