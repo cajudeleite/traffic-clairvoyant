@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  # skip_before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:index, :new, :info]
 
   def index
     @trip = Trip.new()
@@ -29,7 +29,8 @@ class TripsController < ApplicationController
       end
       redirect_to trips_path
     else
-
+      # flash.now[:alert] = 'Failed!'
+      # redirect_to trips_info_path(:params[:trip])
     end
   end
 
