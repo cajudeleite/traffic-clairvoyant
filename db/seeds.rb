@@ -207,7 +207,7 @@ Road.all.each do |road|
   horarios.each do |horario|
     road_car = RoadCar.new
     road_car.day = day
-    road_car.time = horario
+    road_car.time = horario.to_f
     road_car.road = road
     road_car.number_of_cars = 0
     trips_horario = Trip.all.where("time = #{horario} and date = '#{day}'")

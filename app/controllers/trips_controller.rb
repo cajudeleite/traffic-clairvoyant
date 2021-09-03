@@ -10,6 +10,22 @@ class TripsController < ApplicationController
     raise
   end
 
+  def update
+    @trip = Trip.find(params[:id])
+    original_time = @trip.time
+    new_time = params[:trip]["time"].to_f
+    @trip.origin_destination_routes.roads.each do |road|
+      road_car = RoadCar.where("road_id = #{road.id} and time = #{original_time}").first
+      road_car.number_of_cars -= 1
+      road_car.save
+
+      new_road_car = RoadCar.where("road_id = #{road.id} and time = #{new_time}").first
+      new_road_car.number_of_cars += 1
+      new_road_car.save
+    end
+    redirect_to my_trips_path
+  end
+
   def create
     @year = params[:trip]["date(1i)"]
     @month = params[:trip]["date(2i)"]
@@ -61,12 +77,37 @@ class TripsController < ApplicationController
   end
 
   def show
+    @trip = Trip.find(params[:id])
+    @origin = @trip.origin_destination_routes.origin
+    @destination = @trip.origin_destination_routes.destination
+    @year = @trip.date.year
+    @month = @trip.date.month
+    @day = @trip.date.day
+    horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]
+    roads_hash = {}
+    @odr = @trip.origin_destination_routes
+    Road.all.each do |road|
+      horario_hash = {}
+      horarios.each do |horario|
+        road_cars = RoadCar.where("time = '#{horario}' and road_id = #{road.id}").first
+        horario_hash[horario] = road_cars.number_of_cars
+      end
+      roads_hash[road.name] = horario_hash
+    end
+    @graph_data = roads_hash
+    gon.graph_data = @graph_data
   end
 
   def mytrips
     @trips = Trip.all.where("user_id = #{current_user.id}")
   end
 
+
+  def delete
+    @trip = Trip.find[:id]
+    @trip.delete
+    rediret_to my_trips_path
+  end
   private
 
   def trip_params
