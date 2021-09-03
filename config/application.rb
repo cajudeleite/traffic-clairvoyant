@@ -6,10 +6,6 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-<<<<<<< HEAD
-=======
-# config.assets.initialize_on_precompile = false
->>>>>>> b9dca230dface99245237626b1dca344e114337e
 
 module TrafficClairvoyant
   class Application < Rails::Application
