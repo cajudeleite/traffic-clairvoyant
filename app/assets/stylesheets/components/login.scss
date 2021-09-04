@@ -12,6 +12,9 @@
     font-family: 'Cairo', sans-serif;
     display: flex;
     justify-content: center;
+    input {
+      width: 100%;
+    }
   }
   .container {
     align-items: center;
