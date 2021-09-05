@@ -33,8 +33,10 @@ import "bootstrap";
 import { initUpdateNavbarOnScroll } from '../components/navbar';
 //import { switchTheme } from './darktheme';
 import { weatherAPI } from './weatherAPI';
+import { partialJsTripForm } from './tripsIndex.js'
 
 document.addEventListener('turbolinks:load', () => {
+  partialJsTripForm();
   // Call your functions here, e.g:
   // initSelect2();
   //initAutocomplete();
