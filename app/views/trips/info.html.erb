@@ -85,19 +85,56 @@
                         }
         }
 
+
+        const departureTime = document.querySelector('#trip_time');
+
         elements = document.querySelectorAll(`.chart_div_${road}`)
+
         elements.forEach(element => {
           var chart = new google.visualization.ColumnChart(element);
+                                    function selectHandler() {
+          var selectedItem = chart.getSelection()[0];
+          if (selectedItem) {
+            var horario = data.getValue(selectedItem.row, 0);
+            // alert('The user selected ' + horario);
+            console.log('<%Destination.all.first%>')
+
+            departureTime.value = horario;
+          }
+        }
+          google.visualization.events.addListener(chart, 'select', selectHandler);
           chart.draw(data, options)
         });
 
         }
       }
+      // const routeForm = document.querySelector('#trip_origin_destination_routes');
+      // // ADICIONANDO PREENCHIMENTO DEROTA AO CLICAR NA AREA DE ALGUM GRAFICO
+      // let graphsRoutesArea = document.querySelectorAll('.chart-box')
+
+      // graphsRoutesArea.forEach((element) => {
+      //   element.addEventListener('click', (event) => {
+      //     routeForm.value = element.dataset.route;
+      //     alert(element.dataset.route);
+      //   })
+      // });
+
+
+//     const routeForm = document.querySelector('#trip_origin_destination_routes');
+// // ADICIONANDO PREENCHIMENTO DEROTA AO CLICAR NA AREA DE ALGUM GRAFICO
+// let graphsRoutesArea = document.querySelectorAll('.chart-box')
+// graphsRoutesArea.forEach((element) => {
+//   element.addEventListener('click', (event) => {
+//     routeForm.value = element.dataset.route;
+//     alert(element.dataset.route);
+//   })
+// });
+
     </script>
 <div class="text-center">
 
   <% @origin_destination_routes.each do |odr| %>
-
+  <div class="chart-box" data-route = "<%=odr.name%>">
     <h2 class="text-center"><%= odr.name %></h2>
              <div class="charts-flex">
     <% @graph_data.each do |key, value| %>
@@ -106,9 +143,9 @@
       <% if roads.include? key.to_s  %>
           <div class="gchart chart_div_<%=key.to_s%> m-4"></div>
       <% end %>
-
     <% end %>
               </div>
+   </div>
   <% end %>
 
 </div>
