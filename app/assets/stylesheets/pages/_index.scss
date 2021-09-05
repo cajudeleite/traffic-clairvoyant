@@ -1,2 +1,14 @@
 // Import page-specific CSS files here.
 @import "home";
+
+
+.fade {
+  opacity: 0;
+  transition: opacity 0.6s linear;
+  height: 0px;
+}
+
+.show {
+  opacity: 1;
+  height: auto;
+}

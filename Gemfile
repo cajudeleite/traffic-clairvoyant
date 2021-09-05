@@ -34,6 +34,7 @@ gem 'autoprefixer-rails', '10.2.5'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'gon'
+gem 'mini_racer'
 #gem 'google-maps'
 
 group :development, :test do  gem 'pry-byebug'
