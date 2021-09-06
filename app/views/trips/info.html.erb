@@ -31,7 +31,7 @@
   <% @origin_destination_routes.each do |odr| %>
   <div class="chart-box" data-route = "<%=odr.name%>">
   <div class="routes">
-    <h2 class="text-center "><%= odr.name %></h2>
+    <h2 class="text-center route-title"><%= odr.name %></h2>
     <div class="charts-flex">
       <% @graph_data.each do |key, value| %>
       <% roads = []  %>
