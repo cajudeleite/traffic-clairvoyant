@@ -14,12 +14,16 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:id])
     original_time = @trip.time
     new_time = params[:trip]["time"].to_f
-    @trip.origin_destination_routes.roads.each do |road|
-      road_car = RoadCar.where("road_id = #{road.id} and time = #{original_time}").first
+    @trip.origin_destination_routes.routes.each do |route|
+
+      road_original_time = original_time.to_i + (route.step.to_i - 1)
+      road_new_time = new_time.to_i + (route.step.to_i - 1)
+
+      road_car = RoadCar.where("road_id = #{route.road.id} and time = #{road_original_time}").first
       road_car.number_of_cars -= 1
       road_car.save
 
-      new_road_car = RoadCar.where("road_id = #{road.id} and time = #{new_time}").first
+      new_road_car = RoadCar.where("road_id = #{route.road.id} and time = #{road_new_time}").first
       new_road_car.number_of_cars += 1
       new_road_car.save
     end
