@@ -10,6 +10,7 @@ const partialJsTripForm = () => {
   const destinationInput = document.querySelector('#new_trip_destination')
   // const dateInput = document.querySelector('#new_trip_day')
   const submitButton = document.querySelector('.trip-submit .btn')
+  const nextButton = document.querySelector('.next-button span')
 
   const toggleShow = (element) => {
     element.classList.toggle('show');
@@ -21,46 +22,57 @@ const partialJsTripForm = () => {
     console.log('chamou')
   }
 
-  document.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') {
-      switch (i) {
-        case 1:
-        if (originInput.value) {
-          input1.forEach(element => {
-            toggleDNone(element)
-          });
-          input2.forEach(element => {
-            toggleShow(element)
-          });
-          i++;
-        }
-        break;
-        case 2:
-        if (destinationInput.value) {
-          input2.forEach(element => {
-            toggleDNone(element)
-          });
-          input3.forEach(element => {
-            toggleShow(element)
-          });
-          toggleShow(tripSubmit)
-          i++;
-        }
-        break;
-        case 3:
-        // if (dateInput.value){
-          input3.forEach(element => {
-            toggleDNone(element)
-          });
-          toggleDNone(tripSubmit);
-          i++;
-          submitButton.click();
-        // }
-        break;
-        default:
+  const goToNextStep = (event) => {
+    switch (i) {
+      case 1:
+      if (originInput.value) {
+        input1.forEach(element => {
+          toggleDNone(element)
+        });
+        input2.forEach(element => {
+          toggleShow(element)
+        });
+        i++;
       }
+      break;
+      case 2:
+      if (destinationInput.value) {
+        input2.forEach(element => {
+          toggleDNone(element)
+        });
+        input3.forEach(element => {
+          toggleShow(element)
+        });
+        toggleShow(tripSubmit)
+        toggleDNone(nextButton)
+        i++;
+      }
+      break;
+      case 3:
+      // if (dateInput.value){
+      input3.forEach(element => {
+        toggleDNone(element)
+      });
+      toggleDNone(tripSubmit);
+      i++;
+      submitButton.click();
+      // }
+      break;
+      default:
     }
-  });
+  }
+
+  if (input1.length > 0) {
+    document.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        goToNextStep(event);
+      }
+    });
+
+    nextButton.addEventListener('click', (event) => {
+      goToNextStep(event);
+    })
+}
 
 }
 
