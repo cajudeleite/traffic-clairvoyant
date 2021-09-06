@@ -41,8 +41,9 @@ class TripsController < ApplicationController
     trip.user = current_user
     if trip.save
       #Salvar a viagem de carro
-      @odr.roads.each do |road|
-        road_car = RoadCar.where("road_id = #{road.id} and time = '#{params[:trip]['time']}'").first
+      @odr.routes.each do |route|
+        time = params[:trip]['time'].to_i + (route.step.to_i - 1)
+        road_car = RoadCar.where("road_id = #{route.road.id} and time = '#{time}'").first
         road_car.number_of_cars += 1
         road_car.save
       end
