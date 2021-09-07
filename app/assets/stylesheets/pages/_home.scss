@@ -2,5 +2,34 @@
 .home-banner {
   a{
     color: var(--color);
+
   }
+}
+
+
+
+h1 {
+  color:$zodiac;
+}
+
+h2 {
+  color:$light-gray;
+}
+
+.img-circle {
+  border-radius: 50%;
+
+}
+
+#descricao {
+  color: $zodiac;
+  text-align: center;
+  font-size: xx-large;
+
+}
+
+#criadores {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
