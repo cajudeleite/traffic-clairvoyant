@@ -51,9 +51,9 @@
 <div class="mb-4">
   <%= simple_form_for @trip do |f| %>
     <%= f.input :origin_destination_routes, collection: @origin_destination_routes, label: 'Route' %>
-    <%= f.input :time, label: 'Departure Time', collection: Trip::DEPARTURE_TIME%>
+    <%= f.input :time, label: 'Departure Time', collection: Trip::DEPARTURE_TIME, input_html: { class:'datepicker' }%>
     <%= f.input :date, readonly: true %>
-    <%= f.submit %>
+    <%= f.submit class: 'btn' %>
   <% end %>
 </div>
 </div>

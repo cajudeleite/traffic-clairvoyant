@@ -29,6 +29,9 @@ class TripsController < ApplicationController
     end
     # raise
     @trip.time = params[:trip]["time"].to_f
+    # raise
+    actual_duration = params[:trip]['actual_duration(4i)'].to_i*60 + params[:trip]['actual_duration(5i)'].to_i
+    @trip.actual_duration = actual_duration
     @trip.save
     redirect_to my_trips_path, notice: "trip succesfully updated!"
   end
@@ -59,15 +62,16 @@ class TripsController < ApplicationController
   end
 
   def info
-
+    # raise
     if params[:new_trip].nil?
       redirect_to trips_path, alert: 'invalid parameters. Please fill all fields'
     else
       @origin = params[:new_trip][:origin]
       @destination = params[:new_trip][:destination]
-      @year = params[:new_trip]["day(1i)"]
-      @month = params[:new_trip]["day(2i)"]
-      @day = params[:new_trip]["day(3i)"]
+      # @year = params[:new_trip]["day(1i)"]
+      # @month = params[:new_trip]["day(2i)"]
+      # @day = params[:new_trip]["day(3i)"]
+      @date = params[:new_trip]['day']
       # raise
       horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]
       roads_hash = {}
@@ -85,7 +89,7 @@ class TripsController < ApplicationController
       # raise
 
       @trip = Trip.new()
-      @trip.date = DateTime.new(@year.to_i, @month.to_i, @day.to_i).to_date
+      @trip.date = @date
     end
   end
 

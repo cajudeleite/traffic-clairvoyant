@@ -1,10 +1,18 @@
-<div class="container">
-  <h1>page where the user can input the actual time he left, what road he used and how long the trip actually took. The idea is that, with this data,
-the app can get better with predictions</h1>
+<div class="navbar-absolute">
+  <%= render "shared/tvnavbar" %>
+</div>
 
-<%= simple_form_for @trip do |f| %>
-<%= f.input :date %>
-<%= f.input :time, label: 'Actual Departure Time' %>
-<%= f.submit %>
-<% end  %>
+<div class="container">
+    <h1 class="text-center mt-4">Trip Review</h1>
+
+  <%= simple_form_for @trip do |f| %>
+      <div class="d-flex justify-content-between">
+    <%= f.input :date, as: :string, input_html: { class:'flex-grow-1 datepicker' }%>
+
+    <%= f.input :time, label: 'Departure Time', collection: Trip::DEPARTURE_TIME, input_html: { class:'flex-grow-1' }%>
+      <%= f.input :actual_duration, label: 'Actual trip duration', as: :time %>
+    </div>
+    <div class="d-flex justify-content-center">
+          <div class="d-flex justify-content-center"><%= f.submit class: 'btn'%></div>
+    <% end  %>
 </div>

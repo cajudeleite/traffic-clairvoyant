@@ -92,6 +92,6 @@
 <h2 class="text-center">Update your trip</h2>
   <%= simple_form_for @trip do |f| %>
     <%= f.input :time, collection: Trip::DEPARTURE_TIME, label: 'Departure Time' %>
-    <%= f.submit %>
+    <%= f.submit class: 'btn' %>
   <% end  %>
 </div>
