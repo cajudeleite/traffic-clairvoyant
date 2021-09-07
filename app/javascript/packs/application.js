@@ -33,7 +33,7 @@ import "bootstrap";
 import { initUpdateNavbarOnScroll } from '../components/navbar';
 //import { switchTheme } from './darktheme';
 import { weatherAPI } from './weatherAPI';
-import { partialJsTripForm } from './tripsIndex.js'
+import { partialJsTripForm, preventBackOnIndex} from './tripsIndex.js'
 import { showFormOnClick } from './info.js'
 
 document.addEventListener('turbolinks:load', () => {
@@ -47,4 +47,7 @@ document.addEventListener('turbolinks:load', () => {
   //scrollListen();
   //requestFromApi('Ubatuba');
   weatherAPI();
+  preventBackOnIndex();
+
+
 });

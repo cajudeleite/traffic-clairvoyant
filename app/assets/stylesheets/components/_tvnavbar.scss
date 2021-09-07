@@ -1,5 +1,6 @@
 .tvnavbar {
   display: flex;
+  width: 100%;
   justify-content: space-around;
   a{
     color: var(--color);
@@ -13,4 +14,9 @@
   a:hover {
     font-weight: bolder;
   }
+}
+
+.navbar-absolute {
+  // position: absolute;
+  width: 100%;
 }

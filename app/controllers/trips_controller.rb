@@ -30,7 +30,7 @@ class TripsController < ApplicationController
     # raise
     @trip.time = params[:trip]["time"].to_f
     @trip.save
-    redirect_to my_trips_path
+    redirect_to my_trips_path, notice: "trip succesfully updated!"
   end
 
   def create
@@ -59,33 +59,42 @@ class TripsController < ApplicationController
   end
 
   def info
-    # raise
-    @origin = params[:new_trip][:origin]
-    @destination = params[:new_trip][:destination]
-    @year = params[:new_trip]["day(1i)"]
-    @month = params[:new_trip]["day(2i)"]
-    @day = params[:new_trip]["day(3i)"]
-    horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]
-    roads_hash = {}
-    @origin_destination_routes = OriginDestinationRoute.where("origin_id = #{@origin} and destination_id = #{@destination}")
-    Road.all.each do |road|
-      horario_hash = {}
-      horarios.each do |horario|
-        road_cars = RoadCar.where("time = '#{horario}' and road_id = #{road.id}").first
-        horario_hash[horario] = road_cars.number_of_cars
-      end
-      roads_hash[road.name] = horario_hash
-    end
-    @graph_data = roads_hash
-    gon.graph_data = @graph_data
-    # raise
 
-    @trip = Trip.new()
-    @trip.date = DateTime.new(@year.to_i, @month.to_i, @day.to_i).to_date
+    if params[:new_trip].nil?
+      redirect_to trips_path, alert: 'invalid parameters. Please fill all fields'
+    else
+      @origin = params[:new_trip][:origin]
+      @destination = params[:new_trip][:destination]
+      @year = params[:new_trip]["day(1i)"]
+      @month = params[:new_trip]["day(2i)"]
+      @day = params[:new_trip]["day(3i)"]
+      # raise
+      horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]
+      roads_hash = {}
+      @origin_destination_routes = OriginDestinationRoute.where("origin_id = #{@origin} and destination_id = #{@destination}")
+      Road.all.each do |road|
+        horario_hash = {}
+        horarios.each do |horario|
+          road_cars = RoadCar.where("time = '#{horario}' and road_id = #{road.id}").first
+          horario_hash[horario] = road_cars.number_of_cars
+        end
+        roads_hash[road.name] = horario_hash
+      end
+      @graph_data = roads_hash
+      gon.graph_data = @graph_data
+      # raise
+
+      @trip = Trip.new()
+      @trip.date = DateTime.new(@year.to_i, @month.to_i, @day.to_i).to_date
+    end
   end
 
   def show
     @trip = Trip.find(params[:id])
+    # raise
+    if @trip.user != current_user
+      redirect_to my_trips_path, alert: 'you don\'t have permission'
+    end
     @origin = @trip.origin_destination_routes.origin
     @destination = @trip.origin_destination_routes.destination
     @year = @trip.date.year
@@ -114,9 +123,13 @@ class TripsController < ApplicationController
   def destroy
     @trip = Trip.find(params[:id])
     @trip.delete
-    redirect_to my_trips_path
-    flash.now[:alert] = 'Trip Cancelled!'
+    redirect_to my_trips_path, alert: 'trip cancelled!'
   end
+
+  def review
+    @trip = Trip.find(params[:id])
+  end
+
   private
 
   def trip_params

@@ -72,9 +72,21 @@ const partialJsTripForm = () => {
     nextButton.addEventListener('click', (event) => {
       goToNextStep(event);
     })
-}
+  }
 
 }
 
 
-export { partialJsTripForm }
+
+const preventBackOnIndex = () => {
+  const newTripForm = document.querySelector('.new-viagem')
+  // if (newTripForm) {
+  //   // location.hash = "noBack";
+  //   // $(window).on('hashchange', function () {
+  //   //   location.hash = "noBack";
+
+  //   window.onbeforeunload = function () { return "Your work will be lost."; }
+  // }
+}
+
+export { partialJsTripForm, preventBackOnIndex}
