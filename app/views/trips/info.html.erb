@@ -1,4 +1,9 @@
   <%= render "shared/tvnavbar" %>
+  <% url = "https://pt.wikipedia.org/wiki/Samba" %>
+  <% html_file = URI.open(url).read %>
+  <% html_doc = Nokogiri::HTML(html_file) %>
+  <%= html_doc.search('#firstHeading').text %>
+
 
     <div class="container">
       <div class="row">
@@ -22,7 +27,9 @@
       </div>
     </div>
 
-
+<div><h1>Here are the news and cameras</h1></div>
+<a href="https://www.concessionariatamoios.com.br/noticias"><h2>Latest news</h2></a>
+<a href="https://www.concessionariatamoios.com.br/cameras/ver/12"><h2>Cameras</h2></a>
 
 <div class="container">
 <h2 class="text-center"> Which route do you wanna take?</h2>
