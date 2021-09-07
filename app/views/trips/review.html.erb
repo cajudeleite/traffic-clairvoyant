@@ -1,0 +1,10 @@
+<div class="container">
+  <h1>page where the user can input the actual time he left, what road he used and how long the trip actually took. The idea is that, with this data,
+the app can get better with predictions</h1>
+
+<%= simple_form_for @trip do |f| %>
+<%= f.input :date %>
+<%= f.input :time, label: 'Actual Departure Time' %>
+<%= f.submit %>
+<% end  %>
+</div>

@@ -36,7 +36,7 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'gon'
 gem 'mini_racer'
-#gem 'google-maps'
+gem 'google-maps'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
@@ -65,3 +65,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "noticed", "~> 1.4"

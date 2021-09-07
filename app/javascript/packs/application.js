@@ -33,7 +33,8 @@ import "bootstrap";
 import { initUpdateNavbarOnScroll } from '../components/navbar';
 //import { switchTheme } from './darktheme';
 import { weatherAPI } from './weatherAPI';
-import { partialJsTripForm } from './tripsIndex.js'
+import { partialJsTripForm, preventBackOnIndex} from './tripsIndex.js'
+import { showFormOnClick } from './info.js'
 
 document.addEventListener('turbolinks:load', () => {
   partialJsTripForm();
@@ -41,8 +42,12 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
   //initAutocomplete();
   initUpdateNavbarOnScroll();
+  showFormOnClick();
   //switchTheme();
   //scrollListen();
   //requestFromApi('Ubatuba');
   weatherAPI();
+  preventBackOnIndex();
+
+
 });
