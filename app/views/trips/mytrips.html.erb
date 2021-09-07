@@ -1,8 +1,10 @@
-<%= render "shared/tvnavbar" %>
-<h1 class="text-center py-3" style='font-size: 60px;'>My Trips</h1>
+<div class="navbar-absolute">
+  <%= render "shared/tvnavbar" %>
+</div>
 <div class="container">
+<h1 class="text-center py-3" style='font-size: 60px;'>My Trips</h1>
   <div class="trips-flex">
-    <% @trips.each do |trip| %>
+    <% @trips.where("date >= '#{Date.today}'").each do |trip| %>
       <div class="trip-card">
         <h2 class='text-center pt-3'><%= trip.origin_destination_routes.name %></h2>
         <%# <div class="d-flex justify-content-around py-3"> %>
@@ -18,13 +20,21 @@
       </div>
     <% end  %>
   </div>
+<h1 class="text-center py-3" style='font-size: 60px;'>Past Trips</h1>
+  <div class="trips-flex">
+    <% @trips.where("date < '#{Date.today.to_date}'").each do |trip| %>
+      <div class="trip-card">
+        <h2 class='text-center pt-3'><%= trip.origin_destination_routes.name %></h2>
+        <%# <div class="d-flex justify-content-around py-3"> %>
+          <p class="mb-1 ml-2">Origin: <%= trip.origin_destination_routes.origin.name %></p>
+          <p class="mb-1 ml-2">Destination: <%= trip.origin_destination_routes.destination.name  %></p>
+          <p class="mb-1 ml-2">Date: <%= trip.date %></p>
+          <p class = 'ml-2'>Departure Time: <%= "#{trip.time.to_i}h" %></p>
+        <%# </div> %>
+        <div class="d-flex justify-content-around pb-3">
+          <%= link_to 'review trip', review_trip_path(trip) %>
+        </div>
+      </div>
+    <% end  %>
+  </div>
 </div>
-
-
-
-
-    <%# @origin = params[:new_trip][:origin]
-    @destination = params[:new_trip][:destination]
-    @year = params[:new_trip]["day(1i)"]
-    @month = params[:new_trip]["day(2i)"]
-    @day = params[:new_trip]["day(3i)"] %>

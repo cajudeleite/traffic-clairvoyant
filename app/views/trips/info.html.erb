@@ -1,5 +1,6 @@
+  <div class="navbar-absolute">
   <%= render "shared/tvnavbar" %>
-
+  </div>
     <div class="container">
       <div class="row">
         <div class="col-sm-8 offset-sm-2">
@@ -22,16 +23,15 @@
       </div>
     </div>
 
-
-
 <div class="container">
 <h2 class="text-center"> Which route do you wanna take?</h2>
+<!--<h2 class="text-center"><%= Google::Maps.duration(@origin_destination_routes.first.origin.name + ' SP' + ' Brazil', @origin_destination_routes.first.destination.name + ' SP' + ' Brazil') %></h1> -->
 
 <div class="text-center">
   <% @origin_destination_routes.each do |odr| %>
   <div class="chart-box" data-route = "<%=odr.name%>">
   <div class="routes">
-    <h2 class="text-center route-title"><%= odr.name %></h2>
+    <h2 class="text-center route-title" data-road-destination = "<%=odr.id%>"><%= odr.name %></h2>
     <div class="charts-flex">
       <% @graph_data.each do |key, value| %>
       <% roads = []  %>
@@ -46,15 +46,16 @@
   <% end %>
 </div>
 
-
+<div class="new-trip-form fade">
 <h1 class="text-center">Choose your road options and departure time</h1>
 <div class="mb-4">
   <%= simple_form_for @trip do |f| %>
-    <%= f.input :time, label: 'Departure Time', collection: Trip::DEPARTURE_TIME%>
     <%= f.input :origin_destination_routes, collection: @origin_destination_routes, label: 'Route' %>
+    <%= f.input :time, label: 'Departure Time', collection: Trip::DEPARTURE_TIME%>
     <%= f.input :date, readonly: true %>
     <%= f.submit %>
   <% end %>
+</div>
 </div>
 </div>
 
@@ -69,7 +70,7 @@
         let graphs = route.querySelectorAll('.gchart')
         title.addEventListener('click', (event) => {
           graphs.forEach(graph => {
-            graph.classList.toggle('d-none');
+            graph.classList.remove('d-none');
             drawChart();
           });
         })
