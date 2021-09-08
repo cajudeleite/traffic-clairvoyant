@@ -14,6 +14,43 @@
   a:hover {
     font-weight: bolder;
   }
+
+  i{
+    color: var(--color);
+    text-decoration: none;
+    margin-right: 10px;
+    margin-top: 10px;
+    font-weight: normal;
+    font-size: 25px;
+  }
+  i:hover {
+    font-weight: bolder;
+  }
+
+  .offcanvas-body {
+    padding: 16px 0 16px 0;
+    background-color: var(--color);
+    color: var(--bg-color);
+    .card {
+      background-color: var(--color);
+      color: var(--bg-color);
+      border-color: var(--bg-color);
+      a {
+        color: var(--bg-color);
+      }
+    }
+
+  }
+
+  .offcanvas-header {
+    background-color: var(--color);
+    color: var(--bg-color);
+    #close-btn {
+      justify-content: left;
+      margin: 0;
+      color: var(--bg-color);
+    }
+  }
 }
 
 .navbar-absolute {

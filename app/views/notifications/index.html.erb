@@ -1,0 +1,6 @@
+<div class="py-4">
+  <% @notifications.each do |notification| %>
+    <p><%= notification.params[:message] %></p>
+    <%= link_to notification.params[:link], notification_path(notification) %>
+  <% end %>
+</div>
