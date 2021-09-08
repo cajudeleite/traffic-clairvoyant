@@ -7,7 +7,7 @@ require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
-
+// require("bootstrap-datepicker")
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
@@ -15,6 +15,8 @@ require("channels")
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+// require bootstrap-datepicker
 
 
 // ----------------------------------------------------
@@ -27,6 +29,8 @@ require("channels")
 // External imports
 
 import "bootstrap";
+import flatpickr from "flatpickr"
+import "flatpickr/dist/flatpickr.min.css"
 //import { initAutocomplete } from "./autocomplete";
 //import { scrollListen } from './scroll'
 //import { requestFromApi } from './weatherAPI'
@@ -35,6 +39,11 @@ import { initUpdateNavbarOnScroll } from '../components/navbar';
 import { weatherAPI } from './weatherAPI';
 import { partialJsTripForm, preventBackOnIndex} from './tripsIndex.js'
 import { showFormOnClick } from './info.js'
+import { initMap } from './googleMaps.js'
+
+
+
+
 
 document.addEventListener('turbolinks:load', () => {
   partialJsTripForm();
@@ -48,6 +57,13 @@ document.addEventListener('turbolinks:load', () => {
   //requestFromApi('Ubatuba');
   weatherAPI();
   preventBackOnIndex();
-
+  flatpickr(".datepicker", {});
+  flatpickr(".timepicker", {
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: true
+  });
+  initMap();
 
 });

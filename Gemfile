@@ -39,6 +39,7 @@ gem 'simple_form'
 gem 'gon'
 gem 'mini_racer'
 gem 'google-maps'
+gem 'bootstrap-datepicker-rails'
 
 group :development, :test do  gem 'pry-byebug'
   gem 'pry-rails'
