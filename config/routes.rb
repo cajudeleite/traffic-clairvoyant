@@ -8,8 +8,10 @@ Rails.application.routes.draw do
       get 'review'
     end
   end
+
   get 'trips/details/info', to: 'trips#info'
   get 'my_trips', to: 'trips#mytrips'
+  get 'sankey', to: 'trips#sankey'
   require "sidekiq/web"
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
