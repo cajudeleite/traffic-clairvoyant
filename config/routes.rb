@@ -10,5 +10,8 @@ Rails.application.routes.draw do
   end
   get 'trips/details/info', to: 'trips#info'
   get 'my_trips', to: 'trips#mytrips'
-
+  require "sidekiq/web"
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 end
