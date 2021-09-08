@@ -20,3 +20,40 @@ const showFormOnClick = () => {
 
 }
 export { showFormOnClick }
+
+
+
+const paintChartOnClick = () => {
+
+  let chartDataColumns = document.querySelectorAll('rect')
+
+  chartDataColumns.forEach(dataColumn => {
+    dataColumn.addEventListener('click', (event) => {
+      console.log('clicked');
+      findPair(dataColumn);
+    })
+  });
+
+
+  let findPair = (element) => {
+    let chartColumns = document.querySelectorAll('rect');
+    const x = element.attributes['x'].value;
+    console.log('entered function')
+
+    chartColumns.forEach(chartColumn => {
+      console.log(chartColumn)
+      if (chartColumn.attributes['fill'] != undefined && chartColumn.attributes['x'].value != '0'){
+        if (chartColumn.attributes['x'].value === x || 1===1) {
+          chartColumn.attributes["fill"].value = '#FF0000';
+          console.log('hello');
+        } else  {
+          chartColumn.attributes["fill"].value = '#aa8dd8'
+      }
+      }
+    });
+  }
+
+
+}
+
+export { paintChartOnClick }

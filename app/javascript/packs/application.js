@@ -28,7 +28,7 @@ require("channels")
 
 // External imports
 
-import "bootstrap";
+import "bootstrap";paintChartOnClick
 import flatpickr from "flatpickr"
 import "flatpickr/dist/flatpickr.min.css"
 //import { initAutocomplete } from "./autocomplete";
@@ -39,6 +39,7 @@ import { initUpdateNavbarOnScroll } from '../components/navbar';
 import { weatherAPI } from './weatherAPI';
 import { partialJsTripForm, preventBackOnIndex} from './tripsIndex.js'
 import { showFormOnClick } from './info.js'
+import { paintChartOnClick } from './info.js'
 import { initMap } from './googleMaps.js'
 
 
@@ -57,7 +58,7 @@ document.addEventListener('turbolinks:load', () => {
   //requestFromApi('Ubatuba');
   weatherAPI();
   preventBackOnIndex();
-  flatpickr(".datepicker", {});
+  flatpickr(".datepicker", { minDate: Date.now()});
   flatpickr(".timepicker", {
     enableTime: true,
     noCalendar: true,
@@ -65,5 +66,6 @@ document.addEventListener('turbolinks:load', () => {
     time_24hr: true
   });
   initMap();
+  paintChartOnClick();
 
 });

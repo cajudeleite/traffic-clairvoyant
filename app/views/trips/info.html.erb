@@ -116,8 +116,6 @@
         }
         data.addRows(data_array);
 
-        console.log(data_array)
-        console.log(data)
 
         // Set chart options
         var options = {'title':road,
@@ -151,8 +149,6 @@
             if (selectedItem) {
               var horario = data.getValue(selectedItem.row, 0);
               // alert('The user selected ' + horario);
-              console.log('<%Destination.all.first%>')
-
               departureTime.value = horario;
               routeForm.value = originDestinationRoad
             }
