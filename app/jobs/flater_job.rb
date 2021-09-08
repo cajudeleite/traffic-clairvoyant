@@ -26,16 +26,14 @@ class FlaterJob < ApplicationJob
             p @aft
           end
         end
-        p 'this is a separation'
-        p @bef
-        p @real
-        p @aft
-        p 'this is another separation'
-        if (@real.number_of_cars > @aft.number_of_cars || @real.number_of_cars > @bef.number_of_cars)
-          p 'there is a faster way'
-        else
-          p 'nope my dude'
-        end
+      end
+      p 'this is a separation'
+      p @bef
+      p @real
+      p @aft
+      p 'this is another separation'
+      if (@real.number_of_cars > @aft.number_of_cars || @real.number_of_cars > @bef.number_of_cars)
+        NewComment.with(message: "There is a faster schedule for your trip from #{trip.origin_destination_routes.origin.name} to #{trip.origin_destination_routes.destination.name}", link: "Check it out").deliver(user)
       end
     end
     puts 'foi'

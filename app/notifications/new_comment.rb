@@ -20,14 +20,11 @@ class NewComment < Noticed::Base
 
   # Define helper methods to make rendering easier.
   #
-  def message
-    "You have a notification"
-  end
 
   def url
     notification_path(params[:id])
   end
 end
 
-#NewComment.with(post: @post).deliver_later(@current_user)
-#NewComment.with(post: @post).deliver(@current_user)
+#NewComment.with(link: 'isso é um link').deliver_later(@current_user)
+#NewComment.with(link: 'isso é um link').deliver(@current_user)
