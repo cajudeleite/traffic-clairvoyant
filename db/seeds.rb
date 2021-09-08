@@ -13,7 +13,7 @@
 
 ## Estradas
 puts "seeding roads..."
-roads = %w[SP070 SP125 SP099 BR101 SP065]
+roads = %w[SP070 SP125 SP099 BR101 SP065 BR116]
 directions = %w[C P]
 roads.each do |road|
   directions.each do |direction|
@@ -60,9 +60,6 @@ road = Road.where("name = 'SP125' and direction = 'P'").first
 rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 2, duration: 60)
 rota.save!
 
-
-
-
 puts "4"
 origin = Origin.where("name = 'Sao Paulo'").first
 destination = Destination.where("name = 'Ubatuba'").first
@@ -84,9 +81,22 @@ rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, r
 rota.save!
 
 
+origin = Origin.where("name = 'Sao Paulo'").first
+destination = Destination.where("name = 'Ubatuba'").first
+name = "BR116 + SP125"
+new_origin_destination_route = OriginDestinationRoute.new(origin_id: origin.id, destination_id: destination.id, name: name)
+new_origin_destination_route.save!
+
+## ROTAS
+road = Road.where("name = 'BR116' and direction = 'P'").first
+rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 1, duration: 60)
+rota.save!
+
+road = Road.where("name = 'SP125' and direction = 'P'").first
+rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 2, duration: 60)
+rota.save!
 
 
-puts "5"
 # Suzano - Ubatuba
 origin = Origin.where("name = 'Suzano'").first
 destination = Destination.where("name = 'Ubatuba'").first
@@ -128,21 +138,18 @@ puts "6"
 # Sao Jose dos Campos - Ubatuba
 origin = Origin.where("name = 'Sao Jose dos Campos'").first
 destination = Destination.where("name = 'Ubatuba'").first
-name = "SP070 + SP099"
+name = "BR116 + SP125"
 new_origin_destination_route = OriginDestinationRoute.new(origin_id: origin.id, destination_id: destination.id, name: name)
 new_origin_destination_route.save!
 
 ## ROTAS
-road = Road.where("name = 'SP070' and direction = 'P'").first
+road = Road.where("name = 'BR116' and direction = 'P'").first
 rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 1, duration: 60)
 rota.save!
 
-road = Road.where("name = 'SP099' and direction = 'P'").first
+road = Road.where("name = 'SP125' and direction = 'P'").first
 rota = Route.new(origin_destination_route_id: new_origin_destination_route.id, road: road, step: 2, duration: 60)
 rota.save!
-
-
-
 
 
 puts "7"

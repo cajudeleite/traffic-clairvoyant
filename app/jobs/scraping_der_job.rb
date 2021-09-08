@@ -3,13 +3,13 @@ require 'nokogiri'
 class ScrapingDerJob < ApplicationJob
   queue_as :default
   def perform
-    url = "https://pt.wikipedia.org/wiki/Samba"
+    url = "http://www.der.sp.gov.br/WebSite/Index.aspx"
 
     html_file = URI.open(url).read
     html_doc = Nokogiri::HTML(html_file)
 
-    html_doc.search('#firstHeading').each do |element|
-      p element.value
+    html_doc.search('#divCondicoes').each do |element|
+      p element.text
     end
   end
 end

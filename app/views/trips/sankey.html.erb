@@ -1,0 +1,29 @@
+<h1>hello</h1>
+<div class="container">
+
+  <div id="sankey_multiple" style="width: 900px; height: 300px;"></div>
+
+</div>
+
+<script type="text/javascript">
+  google.charts.load("current", {packages:["sankey"]});
+  google.charts.setOnLoadCallback(drawChart);
+   function drawChart() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'From');
+    data.addColumn('string', 'To');
+    data.addColumn('number', 'Weight');
+    data.addRows(gon.graph_data);
+
+    // Set chart options
+    var options = {
+      width: 600,
+      sankey: { node: { nodePadding: 150 } },
+
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.Sankey(document.getElementById('sankey_multiple'));
+    chart.draw(data, options);
+   }
+</script>

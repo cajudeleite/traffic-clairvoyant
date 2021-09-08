@@ -2,6 +2,8 @@
 let map;
 
 const initMap = () => {
+
+
   const mapDiv = document.getElementById("map");
   if (mapDiv) {
     const origins = mapDiv.dataset.origin;
@@ -11,7 +13,6 @@ const initMap = () => {
 
     const url =  `https://maps.googleapis.com/maps/api/geocode/json?address=${origins}&key=AIzaSyA4pZlhCteWdP_CS0zgmUG8YuFsxPsm9bk`
     console.log(url)
-
 
     // const getlat = () => {
     //   fetch(url)
@@ -45,12 +46,14 @@ const initMap = () => {
   }
 
 
-  // const latitude = getlat();
-  // const longitude = getlon();
+
+    // const latitude = getlat();
+    // const longitude = getlon();
 
 
+
+  }
 
 }
-
 
 export { initMap }

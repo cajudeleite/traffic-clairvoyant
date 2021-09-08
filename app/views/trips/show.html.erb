@@ -3,6 +3,26 @@
 </div>
 
 <div class="container">
+  <div class="text-center pt-3">
+    <h2 class="text-center">Route: <%= @odr.name %></h2>
+    <h2 class="text-center">Departure time: <%= @trip.time.to_i %>h</h2>
+             <div class="charts-flex">
+        <div class="gchart chart_div m-4"></div>
+  </div>
+</div>
+
+<div class="container">
+  <h2 class="text-center">Update your trip</h2>
+  <%= simple_form_for @trip do |f| %>
+    <%= f.input :time, collection: Trip::DEPARTURE_TIME, label: 'Departure Time' %>
+    <%= f.submit class: 'btn' %>
+  <% end  %>
+</div>
+
+
+<div id="map" data-origin="<%=@trip.origin_destination_routes.origin.name + ' SP' + ' Brazil'%>" data-destination="<%=@trip.origin_destination_routes.destination.name + ' SP' + ' Brazil'%>"></div>
+
+
     <script type="text/javascript">
 
       // Load the Visualization API and the corechart package.
@@ -29,21 +49,24 @@
         //   ['Pepperoni', 2,3]
         // ])
 
-        for (var road in gon.graph_data) {
-
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Hours');
-        data.addColumn('number', 'Number_of_cars');
+        data.addColumn('string', 'Road');
+        data.addColumn('number', 'Cars' );
+        data.addColumn({ role: 'annotation' })
         data_array = [];
-        graph_data = gon.graph_data[road];
+        graph_data = gon.graph_data;
+        let i = 0
         for (var key in graph_data) {
-          array = [key, graph_data[key]*10];
+          array = [key, graph_data[key], String(gon.time + i) + 'h'];
           data_array.push(array);
+          i++;
         }
+        console.log(data_array)
         data.addRows(data_array);
+        console.log(data)
 
         // Set chart options
-        var options = {'title':road,
+        var options = {'title': 'Your Trip',
                        'width':500,
                        'height':300,
                        'colors':['#AA8DD8'],
@@ -51,50 +74,19 @@
                         vAxis: {
                            gridlines: {
                                color: 'transparent',
-                               interval: 0
+                               interval: 1
                            }
-
                        },
-                                               animation: {
-                                                 startup: true,
-                          duration: 3000
+                      animation: {
+                      startup: true,
+                      duration: 3000
                         }
         }
 
-        elements = document.querySelectorAll(`.chart_div_${road}`)
+        elements = document.querySelectorAll(`.chart_div`)
         elements.forEach(element => {
           var chart = new google.visualization.ColumnChart(element);
           chart.draw(data, options)
         });
-
-        }
       }
     </script>
-<div class="text-center pt-3">
-
-
-    <h2 class="text-center"><%= @odr.name %></h2>
-    <h2 class="text-center"><%= @trip.time %>h</h2>
-             <div class="charts-flex">
-    <% @graph_data.each do |key, value| %>
-    <% roads = []  %>
-    <% @odr.roads.each do |road| roads << road.name end%>
-      <% if roads.include? key.to_s  %>
-          <div class="gchart chart_div_<%=key.to_s%> m-4"></div>
-      <% end %>
-
-    <% end %>
-              </div>
-
-</div>
-
-<div class="container">
-<h2 class="text-center">Update your trip</h2>
-  <%= simple_form_for @trip do |f| %>
-    <%= f.input :time, collection: Trip::DEPARTURE_TIME, label: 'Departure Time' %>
-    <%= f.submit class: 'btn' %>
-  <% end  %>
-</div>
-
-
-<div id="map" data-origin="<%=@trip.origin_destination_routes.origin.name + ' SP' + ' Brazil'%>" data-destination="<%=@trip.origin_destination_routes.destination.name + ' SP' + ' Brazil'%>"></div>

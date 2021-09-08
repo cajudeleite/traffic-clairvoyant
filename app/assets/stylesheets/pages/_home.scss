@@ -8,28 +8,31 @@
 
 
 
-h1 {
-  color:$zodiac;
-}
+.home {
 
-h2 {
-  color:$light-gray;
-}
+  h1 {
+    color:$zodiac;
+  }
 
-.img-circle {
-  border-radius: 50%;
+  h2 {
+    color:$light-gray;
+  }
 
-}
+  .img-circle {
+    border-radius: 50%;
 
-#descricao {
-  color: $zodiac;
-  text-align: center;
-  font-size: xx-large;
+  }
 
-}
+  #descricao {
+    color: $zodiac;
+    text-align: center;
+    font-size: xx-large;
 
-#criadores {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  }
+
+  #criadores {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }

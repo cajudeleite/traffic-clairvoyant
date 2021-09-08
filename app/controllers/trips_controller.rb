@@ -99,6 +99,7 @@ class TripsController < ApplicationController
     if @trip.user != current_user
       redirect_to my_trips_path, alert: 'you don\'t have permission'
     end
+
     @origin = @trip.origin_destination_routes.origin
     @destination = @trip.origin_destination_routes.destination
     @year = @trip.date.year
@@ -107,16 +108,16 @@ class TripsController < ApplicationController
     horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]
     roads_hash = {}
     @odr = @trip.origin_destination_routes
-    Road.all.each do |road|
-      horario_hash = {}
-      horarios.each do |horario|
-        road_cars = RoadCar.where("time = '#{horario}' and road_id = #{road.id}").first
-        horario_hash[horario] = road_cars.number_of_cars
-      end
-      roads_hash[road.name] = horario_hash
+
+    @trip.origin_destination_routes.roads.each do |road|
+      step = @trip.origin_destination_routes.routes.where("road_id = #{road.id}").first.step
+      cars = road.road_cars.where("time = #{@trip.time + (step - 1)}").first.number_of_cars
+      roads_hash[road.name] = cars
     end
     @graph_data = roads_hash
+    gon.time = @trip.time.to_i
     gon.graph_data = @graph_data
+    # raise
   end
 
   def mytrips
@@ -132,6 +133,28 @@ class TripsController < ApplicationController
 
   def review
     @trip = Trip.find(params[:id])
+  end
+
+
+  def sankey
+    @graph_data = []
+    OriginDestinationRoute.all.each do |odr|
+      i = 1
+      weight = Trip.all.where("origin_destination_routes_id = #{odr.id}").count
+      until (odr.routes.where("step = #{i}")).empty?
+        step1 = odr.routes.where("step = #{i}").first.road.name
+        if (odr.routes.where("step = #{i+1}")).empty?
+          step2 = 'Ubatuba'
+        else
+          step2 = odr.routes.where("step = #{i + 1}").first.road.name
+        end
+        array = [step1, step2, weight]
+        @graph_data << array
+        i += 1
+      end
+    end
+    gon.graph_data = @graph_data
+    # raise
   end
 
   private
