@@ -115,6 +115,7 @@ class TripsController < ApplicationController
       roads_hash[road.name] = cars
     end
     @graph_data = roads_hash
+    gon.time = @trip.time.to_i
     gon.graph_data = @graph_data
     # raise
   end
@@ -140,10 +141,14 @@ class TripsController < ApplicationController
     OriginDestinationRoute.all.each do |odr|
       i = 1
       weight = Trip.all.where("origin_destination_routes_id = #{odr.id}").count
-      until (odr.routes.where("step = #{i + 1}")).empty?
-        step1 = odr.routes.where("step = #{i}").first
-        step2 = odr.routes.where("step = #{i + 1}").first
-        array = [step1.road.name, step2.road.name, weight]
+      until (odr.routes.where("step = #{i}")).empty?
+        step1 = odr.routes.where("step = #{i}").first.road.name
+        if (odr.routes.where("step = #{i+1}")).empty?
+          step2 = 'Ubatuba'
+        else
+          step2 = odr.routes.where("step = #{i + 1}").first.road.name
+        end
+        array = [step1, step2, weight]
         @graph_data << array
         i += 1
       end
