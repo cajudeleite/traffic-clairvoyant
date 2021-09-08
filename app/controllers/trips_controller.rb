@@ -115,6 +115,7 @@ class TripsController < ApplicationController
       roads_hash[road.name] = cars
     end
     @graph_data = roads_hash
+    gon.time = @trip.time.to_i
     gon.graph_data = @graph_data
     # raise
   end
