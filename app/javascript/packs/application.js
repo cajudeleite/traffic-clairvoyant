@@ -39,6 +39,11 @@ import { initUpdateNavbarOnScroll } from '../components/navbar';
 import { weatherAPI } from './weatherAPI';
 import { partialJsTripForm, preventBackOnIndex} from './tripsIndex.js'
 import { showFormOnClick } from './info.js'
+import { initMap } from './googleMaps.js'
+
+
+
+
 
 document.addEventListener('turbolinks:load', () => {
   partialJsTripForm();
@@ -59,6 +64,6 @@ document.addEventListener('turbolinks:load', () => {
     dateFormat: "H:i",
     time_24hr: true
   });
-
+  initMap();
 
 });
