@@ -14,17 +14,28 @@
   a:hover {
     font-weight: bolder;
   }
-
-  i{
+  .sino {
     color: var(--color);
+    background-color: var(--bg-color);
     text-decoration: none;
     margin-right: 10px;
     margin-top: 10px;
     font-weight: normal;
     font-size: 25px;
   }
-  i:hover {
+  .sino:hover {
     font-weight: bolder;
+  }
+
+  .volta {
+    color: var(--bg-color);
+    margin-top: 0;
+    display: block;
+    font-size: 23px;
+  }
+
+  .volta:hover {
+    font-size: 25px;
   }
 
   .offcanvas-body {
@@ -45,6 +56,9 @@
   .offcanvas-header {
     background-color: var(--color);
     color: var(--bg-color);
+    i {
+      background-color: var(--color);
+    }
     #close-btn {
       justify-content: left;
       margin: 0;
