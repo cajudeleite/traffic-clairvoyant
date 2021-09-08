@@ -67,21 +67,11 @@ label {
 [data-theme='light'] {
   --bg-color: #F0DDBC;
   --color: #3A4257;
-  --togglebg: #d4e7d5;
-  --toggleslider: #F0DDBC;
-  --roundcolor: #F0DDBC;
-  --svgcolor: #111;
-  --btntext: #f4f4f4;
 }
 
 [data-theme='dark'] {
   --bg-color: #3A4257;
   --color: #F0DDBC;
-  --togglebg: #333;
-  --toggleslider: #3A4257;
-  --roundcolor: #3A4257;
-  --svgcolor: #fff;
-  --btntext: #3A4257;
 }
 
 .slider {
@@ -96,15 +86,6 @@ label {
   content: "";
   position: absolute;
   transition: 0.4s;
-}
-
-
-.btn {
-  background-color: var(--color);
-  color: var(--btntext);
-  // width: 40%;
-  font-size: 20px;
-  font-family: 'Cairo', sans-serif;
 }
 
 #map {
