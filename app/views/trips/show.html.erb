@@ -6,21 +6,41 @@
   <div class="text-center pt-3">
     <h2 class="text-center">Route: <%= @odr.name %></h2>
     <h2 class="text-center">Departure time: <%= @trip.time.to_i %>h</h2>
-             <div class="charts-flex">
-        <div class="gchart chart_div m-4"></div>
+    <div class="charts-flex">
+      <div class="gchart chart_div m-4"></div>
   </div>
 </div>
+
+
+<div class="text-center">
+  <div class="chart-box" data-route = "<%=@odr.name%>">
+  <div class="routes">
+    <h2 class="text-center route-title check-roads" data-road-destination = "<%=@odr.id%>">Check road status</h2>
+    <div class="charts-flex">
+      <% @graph_data_routes.each do |key, value| %>
+      <% roads = []  %>
+      <% @odr.roads.each do |road| roads << road.name end%>
+        <% if roads.include? key.to_s  %>
+            <div class="gchart road chart_div_<%=key.to_s%> m-4 d-none" data-road-destination = "<%=@odr.id%>"></div>
+        <% end %>
+      <% end %>
+    </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 <div class="container">
   <h2 class="text-center">Update your trip</h2>
   <%= simple_form_for @trip do |f| %>
     <%= f.input :time, collection: Trip::DEPARTURE_TIME, label: 'Departure Time' %>
-    <%= f.submit class: 'btn' %>
+    <div class="text-center">
+     <%= f.submit class: 'button-light' %>
+    </div>
   <% end  %>
 </div>
-
-
-<div id="map" data-origin="<%=@trip.origin_destination_routes.origin.name + ' SP' + ' Brazil'%>" data-destination="<%=@trip.origin_destination_routes.destination.name + ' SP' + ' Brazil'%>"></div>
 
 
     <script type="text/javascript">
@@ -34,7 +54,7 @@
       // Callback that creates and populates a data table,
       // instantiates the pie chart, passes in the data and
       // draws it.
-      function drawChart() {
+      function drawChart(option = 'all') {
 
         // Create the data table.
         // var data = new google.visualization.DataTable();
@@ -49,21 +69,22 @@
         //   ['Pepperoni', 2,3]
         // ])
 
+        if (option != 'onlyRoad') {
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Road');
+        data.addColumn('string', 'hour');
         data.addColumn('number', 'Cars' );
         data.addColumn({ role: 'annotation' })
         data_array = [];
         graph_data = gon.graph_data;
         let i = 0
         for (var key in graph_data) {
-          array = [key, graph_data[key], String(gon.time + i) + 'h'];
+          array = [String(gon.time + i) + 'h', graph_data[key], key];
           data_array.push(array);
           i++;
         }
-        console.log(data_array)
+        // console.log(data_array)
         data.addRows(data_array);
-        console.log(data)
+        // console.log(data)
 
         // Set chart options
         var options = {'title': 'Your Trip',
@@ -88,5 +109,64 @@
           var chart = new google.visualization.ColumnChart(element);
           chart.draw(data, options)
         });
+
+
+      }
+
+
+       for (var road in gon.graph_data_routes) {
+        // console.log(road)
+        var data_routes = new google.visualization.DataTable();
+        data_routes.addColumn('string', 'Hours');
+        data_routes.addColumn('number', 'cars');
+        data_routes_array = [];
+        graph_data_routes = gon.graph_data_routes[road];
+        for (var key in graph_data_routes) {
+          array = [key, graph_data_routes[key]*10];
+          data_routes_array.push(array);
+        }
+        data_routes.addRows(data_routes_array);
+
+
+        // Set chart options
+        var options = {'title':road,
+                       'width':500,
+                       'height':300,
+                       'colors':['#AA8DD8'],
+                       'backgroundColor':'#f0ddbc',
+                        vAxis: {
+                          gridlines: {
+                            color: 'transparent',
+                            interval: 0
+                          }
+                        },
+                        animation: {
+                          startup: true,
+                          duration: 3000
+                        }
+        }
+
+        const departureTime = document.querySelector('#trip_time');
+        const routeForm = document.querySelector('#trip_origin_destination_routes');
+
+        elements = document.querySelectorAll(`.chart_div_${road}`)
+
+        elements.forEach(element => {
+          let originDestinationRoad = element.dataset.roadDestination
+          var chart = new google.visualization.ColumnChart(element);
+          chart.draw(data_routes, options)
+        });
+        }
+
+
+        const checkRoadsButton = document.querySelector(".check-roads")
+        let graphs = document.querySelectorAll('.gchart.road')
+        checkRoadsButton.addEventListener('click', (event) => {
+                  graphs.forEach(graph => {
+            graph.classList.toggle('d-none');
+            drawChart('onlyRoad');
+          });
+
+        })
       }
     </script>

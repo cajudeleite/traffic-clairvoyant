@@ -24,15 +24,16 @@ end
 
 ## Origens
 puts "seeding origins..."
-origins = ['Sao Paulo', 'Suzano', 'Sao Jose dos Campos', 'Campinas', 'Taubate']
-origins.each do |origin|
+origins = { 'Sao Paulo' => 24, 'Suzano' => 1, 'Sao Jose dos Campos' => 2, 'Campinas' => 7, 'Taubate' => 1 }
+origins.each do |origin, weight|
   new_origin = Origin.new(name: origin)
+  new_origin.weight = weight
   new_origin.save!
 end
 
 ## Destinos
 puts "seeding destinations..."
-destinations = ["Ubatuba"]
+destinations = ['Ubatuba', 'Santos', 'Caraguatatuba', 'Paraty']
 destinations.each do |destination|
   new_destination = Destination.new(name: destination)
   new_destination.save!
@@ -193,7 +194,7 @@ user.save!
 
 # VIAGENS
 puts 'viagens...'
-horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]
+horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23]
 i = 0
 500.times do
   trip = Trip.new()
@@ -207,7 +208,7 @@ end
 
 day = DateTime.current.to_date
 roads_hash = {}
-horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]
+horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23]
 
 puts 'cars'
 Road.all.each do |road|
@@ -220,7 +221,7 @@ Road.all.each do |road|
     trips_horario = Trip.all.where("time = #{horario} and date = '#{day}'")
     trips_horario.each do |trip|
       trip.origin_destination_routes.routes.where("road_id = #{road.id}").each do |route|
-        road_car.number_of_cars += 1
+        road_car.number_of_cars += (1 * trip.origin_destination_routes.origin.weight)
       end
     end
   road_car.save!

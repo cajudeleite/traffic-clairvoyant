@@ -8,11 +8,11 @@ const initMap = () => {
   if (mapDiv) {
     const origins = mapDiv.dataset.origin;
     const destination = mapDiv.dataset.destination;
-    console.log(origins)
-    console.log(destination)
+    // console.log(origins)
+    // console.log(destination)
 
     const url =  `https://maps.googleapis.com/maps/api/geocode/json?address=${origins}&key=AIzaSyA4pZlhCteWdP_CS0zgmUG8YuFsxPsm9bk`
-    console.log(url)
+    // console.log(url)
 
     // const getlat = () => {
     //   fetch(url)
@@ -36,8 +36,8 @@ const initMap = () => {
     fetch(url)
     .then(response => response.json())
     .then((data) => {
-      console.log(data);
-      console.log(data.results[0].geometry.location.lat);
+      // console.log(data);
+      // console.log(data.results[0].geometry.location.lat);
       map = new google.maps.Map(mapDiv, {
         center: { lat: data.results[0].geometry.location.lat, lng: data.results[0].geometry.location.lng },
         zoom: 12

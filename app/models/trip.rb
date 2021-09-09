@@ -10,6 +10,8 @@ class Trip < ApplicationRecord
   private
 
   def call_flater
-    FlaterJob.perform_later(self.user.id)
+    if self.user.id != 1
+      FlaterJob.perform_later(self.user.id)
+    end
   end
 end

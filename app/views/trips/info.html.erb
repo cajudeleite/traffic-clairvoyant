@@ -1,79 +1,84 @@
-  <div class="navbar-absolute">
-  <h1>teste</h1>
-  <img data-controller='camera' id="imagemSrc" src="" alt="ao vivo" class="img-responsive bordaAzul text-center img-thumbnail" style="margin:auto;background-image: url('/images/loading.gif');width: 352px;height:240px;background-repeat:no-repeat;background-position:center;" >
-
-  </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8 offset-sm-2">
-          <div class="card mt-4 mb-5">
-            <div class="card-category" data-trip-date="<%=params[:new_trip][:day]%> ">
-              <div>
-                <h1>Weather in <span id="city"></span></h1>
-                <h2 id="description"></h2>
-                <div>
-                  <div class="d-flex">
-                    <img src="" alt="" id="icon">
-                    <h2 id="temperature"></h2>
-                  </div>
-                </div>
+<div class="navbar-absolute">
+  <%= render "shared/tvnavbar" %>
+</div>
+<div class="container clima">
+  <div class="row" style='width: 100%;'>
+    <div class="col-12" style='width: 100%; padding: 0;'>
+      <div class="card mb-5">
+        <div class="card-category" data-trip-date="<%=params[:new_trip][:day]%> ">
+          <div class='pe-3'>
+            <h1>Weather in <span id="city"></span></h1>
+            <h2 id="description"></h2>
+            <div>
+              <div class="d-flex justify-content-end pe-3">
+                <img src="" alt="" id="icon">
+                <h2 id="temperature"></h2>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-<div><h2 class="text-center"> Info</h2></div>
-
-
-   <h2 class ="text-center">Latest   news</h2>
-        <p>
-          <iframe src="https://www.concessionariatamoios.com.br/noticias"width="300" height="300">
-            <p>No news!</p>
-          </iframe>
-         </p>
-
-    <a href="https://www.concessionariatamoios.com.br/cameras/ver/12"><h2 class ="text-center">Cameras</h2></a>
-
-<div class="container">
-<h2 class="text-center"> Which route do you wanna take?</h2>
-<!--<h2 class="text-center"><%= Google::Maps.duration(@origin_destination_routes.first.origin.name + ' SP' + ' Brazil', @origin_destination_routes.first.destination.name + ' SP' + ' Brazil') %></h1> -->
-
-<div class="text-center">
-  <% @origin_destination_routes.each do |odr| %>
-  <div class="chart-box" data-route = "<%=odr.name%>">
-  <div class="routes">
-    <h2 class="text-center route-title" data-road-destination = "<%=odr.id%>"><%= odr.name %></h2>
-    <div class="charts-flex">
-      <% @graph_data.each do |key, value| %>
-      <% roads = []  %>
-      <% odr.roads.each do |road| roads << road.name end%>
-        <% if roads.include? key.to_s  %>
-            <div class="gchart chart_div_<%=key.to_s%> m-4 d-none" data-road-destination = "<%=odr.id%>"></div>
-        <% end %>
-      <% end %>
-    </div>
+  </div>
+</div>
+<div class="info-content">
+  <div class="livecam">
+    <h1 class ="text-center">Cameras</h1>
+    <div class="d-flex justify-content-center pb-5 pt-1">
+      <img data-controller='camera' id="imagemSrc" src="" alt="ao vivo" class="img-responsive bordaAzul text-center img-thumbnail" style="margin:auto;background-image: url('/images/loading.gif');width: 28%;
+      height: 25%;background-repeat:no-repeat;background-position:center;" >
     </div>
   </div>
-  <% end %>
-</div>
-
-<div class="new-trip-form fade">
-<h1 class="text-center">Choose your road options and departure time</h1>
-<div class="mb-4">
-  <%= simple_form_for @trip do |f| %>
-    <%= f.input :origin_destination_routes, collection: @origin_destination_routes, label: 'Route' %>
-    <%= f.input :time, label: 'Departure Time', collection: Trip::DEPARTURE_TIME%>
-      <%= simple_fields_for :fake do |o|  %>
-    <%= o.input :departure, as: :string, disabled: true, label: 'Departure Date',  input_html: { class:'datepicker' }, input_html: { value: @trip.date} %>
-    <% end %>
-  <div class="d-none">
-    <%= f.input :date, readonly: true%>
+  <div class="container">
+    <h1 class="text-center pb-3" style='font-family: "Cairo", sans-serif;'> Which route do you wanna take?</h1>
+    <div class="d-flex justify-content-center pt-4 pb-5">
+      <div id="sankey_multiple" style=" height: 300px;"></div>
     </div>
-    <%= f.submit class: 'btn mt-4' %>
-  <% end %>
-</div>
-</div>
+    <div class="text-center">
+      <% @origin_destination_routes.each do |odr| %>
+        <div class="chart-box" data-route = "<%=odr.name%>">
+          <div class="routes">
+            <h2 class="text-center route-title" data-road-destination = "<%=odr.id%>"><%= odr.name %></h2>
+            <div class="charts-flex">
+              <% @graph_data.each do |key, value| %>
+                <% roads = []  %>
+                <% odr.roads.each do |road| roads << road.name end%>
+                <% if roads.include? key.to_s  %>
+                  <div class="gchart chart_div_<%=key.to_s%> m-4 d-none" data-road-destination = "<%=odr.id%>"></div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="new-trip-form fade d-flex align-items-center pt-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-sm-7">
+          <h1 class="text-center" style='font-family: "Cairo", sans-serif;'>Choose your road options and departure time</h1>
+          <div class="mb-4">
+            <%= simple_form_for @trip do |f| %>
+              <%= f.input :origin_destination_routes, collection: @origin_destination_routes, label: 'Route' %>
+              <%= f.input :time, label: 'Departure Time', collection: Trip::DEPARTURE_TIME%>
+              <%= simple_fields_for :fake do |o|  %>
+                <%= o.input :departure, as: :string, disabled: true, label: 'Departure Date',  input_html: { class:'datepicker' }, input_html: { value: @trip.date} %>
+              <% end %>
+              <div class="d-none">
+                <%= f.input :date, readonly: true%>
+              </div>
+              <div class=" d-flex justify-content-center">
+                <div class="form-actions btn mt-4">
+                  <%= f.button :submit, 'Create Trip' %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -87,7 +92,7 @@
         let graphs = route.querySelectorAll('.gchart')
         title.addEventListener('click', (event) => {
           graphs.forEach(graph => {
-            graph.classList.remove('d-none');
+            graph.classList.toggle('d-none');
             drawChart();
           });
         })
@@ -159,3 +164,27 @@
       }
 
     </script>
+
+
+<script type="text/javascript">
+  google.charts.load("current", {packages:["sankey"]});
+  google.charts.setOnLoadCallback(drawSankeyChart);
+   function drawSankeyChart() {
+    var data_sankey = new google.visualization.DataTable();
+    data_sankey.addColumn('string', 'From');
+    data_sankey.addColumn('string', 'To');
+    data_sankey.addColumn('number', 'Weight');
+    data_sankey.addRows(gon.sankey_graph_data);
+
+    // Set chart options
+    var options = {
+      width: 600,
+      sankey: { node: { nodePadding: 150 } },
+
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var sankey_chart = new google.visualization.Sankey(document.getElementById('sankey_multiple'));
+    sankey_chart.draw(data_sankey, options);
+   }
+</script>
