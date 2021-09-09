@@ -21,9 +21,6 @@ class NewComment < Noticed::Base
   # Define helper methods to make rendering easier.
   #
 
-  def url
-    notification_path(params[:id])
-  end
 end
 
 #NewComment.with(link: 'isso é um link').deliver_later(@current_user)
