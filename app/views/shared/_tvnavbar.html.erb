@@ -13,7 +13,7 @@
         <% current_user.notifications.each do |notification| %>
         <div class="card">
           <p><%= notification.params[:message] %></p>
-          <%= link_to notification.params[:link], notification_path(notification) %>
+          <%= link_to notification.params[:link], notification.params[:url] %>
         </div>
         <% end %>
       </div>
