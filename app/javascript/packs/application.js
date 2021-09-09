@@ -28,7 +28,8 @@ require("channels")
 
 // External imports
 
-import "bootstrap";paintChartOnClick
+import "bootstrap"
+window.bootstrap = require('bootstrap/dist/js/bootstrap.bundle.js');
 import flatpickr from "flatpickr"
 import "flatpickr/dist/flatpickr.min.css"
 //import { initAutocomplete } from "./autocomplete";
@@ -72,5 +73,13 @@ document.addEventListener('turbolinks:load', () => {
   });
   initMap();
   paintChartOnClick();
+
+
+
+  const popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+  const popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+    return new bootstrap.Popover(popoverTriggerEl)
+  })
+
 
 });
