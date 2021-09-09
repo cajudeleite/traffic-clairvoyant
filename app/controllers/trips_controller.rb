@@ -42,6 +42,10 @@ class TripsController < ApplicationController
     @day = params[:trip]["date(3i)"]
     @odr = OriginDestinationRoute.find(params[:trip]["origin_destination_routes"])
     date = DateTime.new(@year.to_i, @month.to_i, @day.to_i).to_date
+    if Trip.where("user_id = #{current_user.id} and date = '#{date}'").count > 0
+      flash[:notice] = 'You already have a planned trip for this date.'
+      redirect_to my_trips_path and return
+    end
     trip = Trip.new(trip_params)
     trip.origin_destination_routes = @odr
     trip.date = date
