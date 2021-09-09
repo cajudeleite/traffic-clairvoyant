@@ -3,6 +3,16 @@
   justify-content: center;
   align-items: center;
   height: 90%;
+  span {
+    font-family: 'Cairo', sans-serif;
+    font-size: 20px;
+  }
+  .new-trip {
+    height: 50px;
+  }
+  .trip-submit {
+    padding-top: 10px;
+  }
   .btn {
     background-color: var(--color);
     color: var(--btntext);
