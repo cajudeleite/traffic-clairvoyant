@@ -8,7 +8,8 @@
 .route-title {
   background-color: var(--color);
   color: var(--bg-color);
-  box-shadow: 5px 8px 10px 0px #000;
+  box-shadow: -6px 5px 5px grey;
+  border-radius: 10px;
   width: auto;
   margin-bottom: 30px;
   display: block;
@@ -16,4 +17,9 @@
   margin-left: auto;
   width: 40%;
   padding: 10px 20px;
+}
+
+
+.card-category {
+  background-color: var(--bg-color);
 }

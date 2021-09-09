@@ -17,6 +17,35 @@
 }
 .next-button {
   span{
-  cursor: pointer;
+    cursor: pointer;
   }
+}
+
+#form-box {
+  position: relative;
+  background-color: var(--color) ;
+  height: 400px;
+  width: 300px;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: -8px 5px 10px grey;
+
+  h2, p, a, span {
+    color: var(--bg-color)
+  }
+
+  h2 {
+    font-size: 22px;
+    // margin-top: 30px;
+  }
+
+  select, input {
+    border-radius: 10px;
+  }
+
+  .btn {
+    background-color: var(--bg-color);
+    width: 150px;
+  }
+
 }

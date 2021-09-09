@@ -14,12 +14,13 @@ const partialJsTripForm = () => {
 
   const toggleShow = (element) => {
     element.classList.toggle('show');
-    console.log('chamou')
+    if (element.tagName === 'H2') [
+      element.classList.add('mt-4')
+    ]
   }
 
   const toggleDNone = (element) => {
     element.classList.toggle('d-none');
-    console.log('chamou')
   }
 
   const goToNextStep = (event) => {
@@ -27,7 +28,7 @@ const partialJsTripForm = () => {
       case 1:
       if (originInput.value) {
         input1.forEach(element => {
-          toggleDNone(element)
+          // toggleDNone(element)
         });
         input2.forEach(element => {
           toggleShow(element)
@@ -38,7 +39,7 @@ const partialJsTripForm = () => {
       case 2:
       if (destinationInput.value) {
         input2.forEach(element => {
-          toggleDNone(element)
+          // toggleDNone(element)
         });
         input3.forEach(element => {
           toggleShow(element)
@@ -51,7 +52,7 @@ const partialJsTripForm = () => {
       case 3:
       // if (dateInput.value){
       input3.forEach(element => {
-        toggleDNone(element)
+        // toggleDNone(element)
       });
       toggleDNone(tripSubmit);
       i++;

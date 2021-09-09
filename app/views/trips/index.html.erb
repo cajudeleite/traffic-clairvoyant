@@ -4,18 +4,18 @@
 <div class="new-viagem">
   <div class="container">
     <div class="row justify-content-md-center">
-      <div class="col-sm-7">
+      <div class="col-sm-7" id="form-box">
         <h2 class="trip-input-1 fade show">Where are you?</h2>
         <%= simple_form_for :new_trip, url: trips_details_info_path, method: :get, required: true do |o| %>
           <div class="py-1 trip-input-1 fade show"><%= o.input :origin, collection: Origin.all, label: false%></div>
         <h2 class="trip-input-2 fade ">Where are you going?</h2>
-          <div class="py-1 trip-input-2 fade"><%= o.input :destination, collection: Destination.all, label: false %></div>
+          <div class="py-1 trip-input-2 fade "><%= o.input :destination, collection: Destination.all, label: false %></div>
         <h2 class="trip-input-3 fade">When do you plan on leaving?</h2>
  <!--         <div class="pt-1 trip-input-3 fade"><%= o.input :day, as: :date %></div> -->
           <div class="pt-1 trip-input-3 fade"><%= o.input :day,label: false,  as: :string, input_html: { class:'pt-1 trip-input-3 fade datepicker' }%></div>
           <div class="d-flex justify-content-center trip-submit fade"><%= o.submit class: 'btn m-4'%></div>
-          <div class="next-button text-end"><span>next</span></div>
         <% end%>
+                  <div class="next-button text-end"><span>next</span></div>
       </div>
     </div>
   </div>
