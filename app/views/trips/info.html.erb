@@ -89,7 +89,7 @@
         let graphs = route.querySelectorAll('.gchart')
         title.addEventListener('click', (event) => {
           graphs.forEach(graph => {
-            graph.classList.remove('d-none');
+            graph.classList.toggle('d-none');
             drawChart();
           });
         })

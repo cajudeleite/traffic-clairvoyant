@@ -8,17 +8,22 @@ const showFormOnClick = () => {
 
   routeOptions.forEach((route) => {
     route.addEventListener('click', (event) => {
-      newTripForm.classList.add('show')
+      if (newTripForm) {
+        newTripForm.classList.add('show')
+      }
       routeOptions.forEach((routeToHide) => {
         if (routeToHide != route) {
-          routeToHide.parentElement.parentElement.classList.add('fade')
+          // routeToHide.parentElement.parentElement.classList.add('fade')
         }
       });
-      routeForm.value = route.dataset.roadDestination
+      if (routeForm){
+        routeForm.value = route.dataset.roadDestination
+      }
     })
   });
 
 }
+
 export { showFormOnClick }
 
 
@@ -48,7 +53,7 @@ const paintChartOnClick = () => {
           console.log('hello');
         } else  {
           chartColumn.attributes["fill"].value = '#aa8dd8'
-      }
+        }
       }
     });
   }
