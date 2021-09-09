@@ -31,6 +31,9 @@
   </div>
   <div class="container">
     <h1 class="text-center pb-3" style='font-family: "Cairo", sans-serif;'> Which route do you wanna take?</h1>
+    <div class="d-flex">
+      <div id="sankey_multiple" style=" height: 300px;"></div>
+    </div>
     <div class="text-center">
       <% @origin_destination_routes.each do |odr| %>
         <div class="chart-box" data-route = "<%=odr.name%>">
@@ -161,3 +164,27 @@
       }
 
     </script>
+
+
+<script type="text/javascript">
+  google.charts.load("current", {packages:["sankey"]});
+  google.charts.setOnLoadCallback(drawChart);
+   function drawChart() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'From');
+    data.addColumn('string', 'To');
+    data.addColumn('number', 'Weight');
+    data.addRows(gon.sankey_graph_data);
+
+    // Set chart options
+    var options = {
+      width: 600,
+      sankey: { node: { nodePadding: 150 } },
+
+    };
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.Sankey(document.getElementById('sankey_multiple'));
+    chart.draw(data, options);
+   }
+</script>

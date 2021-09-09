@@ -93,6 +93,26 @@ class TripsController < ApplicationController
       # raise
       @trip = Trip.new()
       @trip.date = @date
+
+
+    @sankey_graph_data = []
+    OriginDestinationRoute.all.each do |odr|
+      i = 1
+      weight = Trip.all.where("origin_destination_routes_id = #{odr.id}").count
+      until (odr.routes.where("step = #{i}")).empty?
+        step1 = odr.routes.where("step = #{i}").first.road.name
+        if (odr.routes.where("step = #{i+1}")).empty?
+          step2 = 'Ubatuba'
+        else
+          step2 = odr.routes.where("step = #{i + 1}").first.road.name
+        end
+        array = [step1, step2, weight]
+        @sankey_graph_data << array
+        i += 1
+      end
+    end
+    gon.sankey_graph_data = @sankey_graph_data
+    # raise
     end
   end
 
