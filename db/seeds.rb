@@ -24,15 +24,16 @@ end
 
 ## Origens
 puts "seeding origins..."
-origins = ['Sao Paulo', 'Suzano', 'Sao Jose dos Campos', 'Campinas', 'Taubate']
-origins.each do |origin|
+origins = { 'Sao Paulo' => 24, 'Suzano' => 1, 'Sao Jose dos Campos' => 2, 'Campinas' => 7, 'Taubate' => 1 }
+origins.each do |origin, weight|
   new_origin = Origin.new(name: origin)
+  new_origin.weight = weight
   new_origin.save!
 end
 
 ## Destinos
 puts "seeding destinations..."
-destinations = ["Ubatuba"]
+destinations = ['Ubatuba', 'Santos', 'Caraguatatuba', 'Paraty']
 destinations.each do |destination|
   new_destination = Destination.new(name: destination)
   new_destination.save!
@@ -220,7 +221,7 @@ Road.all.each do |road|
     trips_horario = Trip.all.where("time = #{horario} and date = '#{day}'")
     trips_horario.each do |trip|
       trip.origin_destination_routes.routes.where("road_id = #{road.id}").each do |route|
-        road_car.number_of_cars += 1
+        road_car.number_of_cars += (1 * trip.origin_destination_routes.origin.weight)
       end
     end
   road_car.save!
