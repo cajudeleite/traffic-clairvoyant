@@ -67,8 +67,8 @@ class TripsController < ApplicationController
 
   def info
     # raise
-    if params[:new_trip].nil?
-      redirect_to trips_path, alert: 'invalid parameters. Please fill all fields'
+    if params[:new_trip].nil? || params[:new_trip]['day'] == ''
+      redirect_to trips_path, alert: 'Invalid parameters. Please fill all fields'
     else
       @origin = params[:new_trip][:origin]
       @destination = params[:new_trip][:destination]
