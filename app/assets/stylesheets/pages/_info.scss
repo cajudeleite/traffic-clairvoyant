@@ -4,22 +4,61 @@
   // margin: 0 auto !important;
 }
 
-
-.route-title {
-  background-color: var(--color);
-  color: var(--bg-color);
-  box-shadow: -6px 5px 5px grey;
-  border-radius: 3px;
-  width: auto;
-  margin-bottom: 30px;
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  width: 40%;
-  padding: 10px 20px;
+.info-content {
+  font-family: 'Cairo', sans-serif;
+  .route-title {
+    background-color: var(--color);
+    color: var(--bg-color);
+    box-shadow: -6px 5px 5px grey;
+    border-radius: 3px;
+    width: auto;
+    margin-bottom: 30px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    width: 40%;
+    padding: 10px 20px;
+  }
+  .livecam {
+    justify-content: center;
+    h1 {
+      font-family: 'Cairo', sans-serif;
+      color: var(--color);
+    }
+    .img-thumbnail {
+      border: none;
+      padding: 0;
+    }
+  }
 }
 
+.clima {
+  height: fit-content;
+  max-width: none;
+  padding: 0;
+  margin: 0;
+  .row {
+    margin: 0;
+    padding: 0;
+  }
+  .card {
+    border: none;
+    box-shadow: 0 8px 8px -2px black;
+  }
+}
 
-.card-category {
-  background-color: var(--bg-color);
+.new-trip-form {
+  .btn {
+    background-color: var(--color);
+    color: var(--bg-color);
+    width: 40%;
+    font-size: 17px;
+    font-weight: 600;
+    font-family: 'Cairo', sans-serif;
+    display: flex;
+    justify-content: center;
+    input {
+      width: 100%;
+    }
+  }
 }
