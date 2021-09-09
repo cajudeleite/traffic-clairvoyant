@@ -3,12 +3,16 @@
   background-position: center;
   height: 220px;
   display: flex;
-  justify-content: center;
+  justify-content: end;
+  text-align: end;
   align-items: center;
   color: white;
+  border: none;
   font-size: 24px;
   font-weight: bold;
+  background-color: var(--bg-color);
+  h1, h2 {
+    font-family: 'Cairo', sans-serif;
+  }
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  border-radius: 5px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
