@@ -15,7 +15,7 @@
 <div class="text-center">
   <div class="chart-box" data-route = "<%=@odr.name%>">
   <div class="routes">
-    <h2 class="text-center route-title check-roads" data-road-destination = "<%=@odr.id%>">Check the roads</h2>
+    <h2 class="text-center route-title check-roads" data-road-destination = "<%=@odr.id%>">Check road status</h2>
     <div class="charts-flex">
       <% @graph_data_routes.each do |key, value| %>
       <% roads = []  %>
@@ -36,12 +36,11 @@
   <h2 class="text-center">Update your trip</h2>
   <%= simple_form_for @trip do |f| %>
     <%= f.input :time, collection: Trip::DEPARTURE_TIME, label: 'Departure Time' %>
-    <%= f.submit class: 'btn' %>
+    <div class="text-end">
+     <%= f.submit class: 'button-light' %>
+    </div>
   <% end  %>
 </div>
-
-
-<div id="map" data-origin="<%=@trip.origin_destination_routes.origin.name + ' SP' + ' Brazil'%>" data-destination="<%=@trip.origin_destination_routes.destination.name + ' SP' + ' Brazil'%>"></div>
 
 
     <script type="text/javascript">
