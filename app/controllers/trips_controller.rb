@@ -167,6 +167,9 @@ class TripsController < ApplicationController
 
   def review
     @trip = Trip.find(params[:id])
+    if @trip.user != current_user
+      redirect_to my_trips_path, alert: 'you don\'t have permission'
+    end
   end
 
 
@@ -175,6 +178,11 @@ class TripsController < ApplicationController
     OriginDestinationRoute.all.each do |odr|
       i = 1
       weight = Trip.all.where("origin_destination_routes_id = #{odr.id}").count
+
+      # origin = odr.origin.name
+      # first_step  = odr.routes.where("step = 1").first.road.name
+      # @graph_data << [origin, first_step, weight]
+
       until (odr.routes.where("step = #{i}")).empty?
         step1 = odr.routes.where("step = #{i}").first.road.name
         if (odr.routes.where("step = #{i+1}")).empty?
