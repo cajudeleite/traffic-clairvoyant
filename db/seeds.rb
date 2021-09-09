@@ -194,7 +194,7 @@ user.save!
 
 # VIAGENS
 puts 'viagens...'
-horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]
+horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23]
 i = 0
 500.times do
   trip = Trip.new()
@@ -208,7 +208,7 @@ end
 
 day = DateTime.current.to_date
 roads_hash = {}
-horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]
+horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23]
 
 puts 'cars'
 Road.all.each do |road|

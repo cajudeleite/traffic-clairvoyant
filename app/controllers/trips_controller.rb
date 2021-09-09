@@ -77,7 +77,7 @@ class TripsController < ApplicationController
       # @day = params[:new_trip]["day(3i)"]
       @date = params[:new_trip]['day']
       # raise
-      horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]
+      horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23]
       roads_hash = {}
       @origin_destination_routes = OriginDestinationRoute.where("origin_id = #{@origin} and destination_id = #{@destination}")
       Road.all.each do |road|
@@ -127,7 +127,7 @@ class TripsController < ApplicationController
     @year = @trip.date.year
     @month = @trip.date.month
     @day = @trip.date.day
-    horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24]
+    horarios = %w[0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23]
     roads_hash = {}
     @odr = @trip.origin_destination_routes
     routes_hash = {}
