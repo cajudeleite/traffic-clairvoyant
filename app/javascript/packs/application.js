@@ -31,7 +31,6 @@ require("channels")
 import "bootstrap"
 window.bootstrap = require('bootstrap/dist/js/bootstrap.bundle.js');
 import flatpickr from "flatpickr"
-import "flatpickr/dist/flatpickr.min.css"
 //import { initAutocomplete } from "./autocomplete";
 //import { scrollListen } from './scroll'
 //import { requestFromApi } from './weatherAPI'
