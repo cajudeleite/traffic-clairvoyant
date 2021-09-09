@@ -44,7 +44,9 @@
                 <% roads = []  %>
                 <% odr.roads.each do |road| roads << road.name end%>
                 <% if roads.include? key.to_s  %>
-                  <div class="gchart chart_div_<%=key.to_s%> m-4 d-none" data-road-destination = "<%=odr.id%>"></div>
+                  <div class="gchart-box">
+                    <div class="gchart chart_div_<%=key.to_s%> m-4 d-none" data-road-destination = "<%=odr.id%>"></div>
+                  </div>
                 <% end %>
               <% end %>
             </div>
@@ -114,7 +116,7 @@
         data_array = [];
         graph_data = gon.graph_data[road];
         for (var key in graph_data) {
-          array = [key, graph_data[key]*10];
+          array = [key, graph_data[key]];
           data_array.push(array);
         }
         data.addRows(data_array);
@@ -124,8 +126,8 @@
         var options = {'title':road,
                        'width':500,
                        'height':300,
-                       'colors':['#AA8DD8'],
-                       'backgroundColor':'#f0ddbc',
+                       'colors':['#3A4257'],
+                       'backgroundColor':'#e8e6f2',
                         vAxis: {
                           gridlines: {
                             color: 'transparent',

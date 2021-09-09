@@ -26,7 +26,7 @@ const drawChart = () => {
       'width':500,
       'height':300,
       'colors':['#AA8DD8'],
-      'backgroundColor':'#f0ddbc',
+        'backgroundColor':'#c4c1d4',
 
       vAxis: {
         gridlines: {

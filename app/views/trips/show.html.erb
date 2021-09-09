@@ -7,7 +7,9 @@
     <h2 class="text-center">Route: <%= @odr.name %></h2>
     <h2 class="text-center">Departure time: <%= @trip.time.to_i %>h</h2>
     <div class="charts-flex">
+    <div class="gchart-box">
       <div class="gchart chart_div m-4"></div>
+    </div>
   </div>
 </div>
 
@@ -21,7 +23,9 @@
       <% roads = []  %>
       <% @odr.roads.each do |road| roads << road.name end%>
         <% if roads.include? key.to_s  %>
+        <div class="gchart-box">
             <div class="gchart road chart_div_<%=key.to_s%> m-4 d-none" data-road-destination = "<%=@odr.id%>"></div>
+        </div>
         <% end %>
       <% end %>
     </div>
@@ -90,8 +94,8 @@
         var options = {'title': 'Your Trip',
                        'width':500,
                        'height':300,
-                       'colors':['#AA8DD8'],
-                       'backgroundColor':'#f0ddbc',
+                       'colors':['#3A4257'],
+                       'backgroundColor':'#e8e6f2',
                         vAxis: {
                            gridlines: {
                                color: 'transparent',
@@ -122,7 +126,7 @@
         data_routes_array = [];
         graph_data_routes = gon.graph_data_routes[road];
         for (var key in graph_data_routes) {
-          array = [key, graph_data_routes[key]*10];
+          array = [key, graph_data_routes[key]];
           data_routes_array.push(array);
         }
         data_routes.addRows(data_routes_array);
@@ -132,8 +136,8 @@
         var options = {'title':road,
                        'width':500,
                        'height':300,
-                       'colors':['#AA8DD8'],
-                       'backgroundColor':'#f0ddbc',
+                       'colors':['#3A4257'],
+                       'backgroundColor':'#e8e6f2',
                         vAxis: {
                           gridlines: {
                             color: 'transparent',
