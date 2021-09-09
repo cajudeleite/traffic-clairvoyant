@@ -168,13 +168,13 @@
 
 <script type="text/javascript">
   google.charts.load("current", {packages:["sankey"]});
-  google.charts.setOnLoadCallback(drawChart);
-   function drawChart() {
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'From');
-    data.addColumn('string', 'To');
-    data.addColumn('number', 'Weight');
-    data.addRows(gon.sankey_graph_data);
+  google.charts.setOnLoadCallback(drawSankeyChart);
+   function drawSankeyChart() {
+    var data_sankey = new google.visualization.DataTable();
+    data_sankey.addColumn('string', 'From');
+    data_sankey.addColumn('string', 'To');
+    data_sankey.addColumn('number', 'Weight');
+    data_sankey.addRows(gon.sankey_graph_data);
 
     // Set chart options
     var options = {
@@ -184,7 +184,7 @@
     };
 
     // Instantiate and draw our chart, passing in some options.
-    var chart = new google.visualization.Sankey(document.getElementById('sankey_multiple'));
-    chart.draw(data, options);
+    var sankey_chart = new google.visualization.Sankey(document.getElementById('sankey_multiple'));
+    sankey_chart.draw(data_sankey, options);
    }
 </script>
