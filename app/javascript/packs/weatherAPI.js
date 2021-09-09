@@ -1,6 +1,7 @@
 const weatherAPI = () => {
 
-  const url = 'https://api.openweathermap.org/data/2.5/weather?q=ubatuba&appid=0917122780fc85b3d5c79495fe8e1fb1&units=metric'
+//const url = 'https://api.openweathermap.org/data/2.5/weather?q=ubatuba&appid=0917122780fc85b3d5c79495fe8e1fb1&units=metric'
+  const url = 'https://api.openweathermap.org/data/2.5/forecast?q=ubatuba&appid=0917122780fc85b3d5c79495fe8e1fb1&units=metric'
 
   const city = document.querySelector('#city');
   const description = document.querySelector('#description');
@@ -12,11 +13,29 @@ const weatherAPI = () => {
     fetch(url)
     .then(response => response.json())
     .then((data) => {
-      const temp = Math.round(data.main.temp);
+
+      const tripdate = new Date(card.dataset.tripDate)
+      const today = new Date();
+      today.setHours(0,0,0,0);
+      const days = (tripdate-today)/(1000*3600*24)
+      let temp;
+      if (days===1) {
+        temp = Math.round(data.list[6].main.temp);
+      } else if (days===2){
+        temp = Math.round(data.list[14].main.temp);
+      } else if (days === 3) {
+        temp = Math.round(data.list[22].main.temp);
+      } else if (days === 4) {
+        temp = Math.round(data.list[30].main.temp);
+      } else if (days === 5) {
+        temp = Math.round(data.list[38].main.temp);
+      } else  {
+        temp = Math.round(data.list[0].main.temp);
+      }
 
       console.log(data);
-      city.innerText = data.name;
-      description.innerText = data.weather[0].description;
+      city.innerText = data.city.name;
+      description.innerText = data.list[0].weather[0].description;
       temperature.innerText = `${temp}°C`;
       icon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
       if (temp < 20) {
