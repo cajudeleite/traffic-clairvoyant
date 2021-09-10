@@ -1,6 +1,16 @@
 // Specific CSS for your home-page
 
 .home {
+  a {
+    text-decoration: none;
+  }
+  .fab {
+    text-decoration: none;
+    color: var(--color);
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
 
   h1 {
     color:$zodiac;
@@ -68,9 +78,8 @@
 
     &:hover {
       box-shadow: -5px 2px 3px grey;
-      scale: 1.05;
       transition: 0.2s;
-
+      transform: scale(1.05);
     }
 
     img {

@@ -22,7 +22,7 @@
 
     &:hover {
       transition: 0.1s;
-      scale: 1.03;
+      transform: scale(1.03);
       box-shadow: -1px 1px 4px grey;
     }
   }
