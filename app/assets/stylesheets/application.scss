@@ -36,13 +36,7 @@
 @import "components/charts";
 @import "flatpickr/dist/flatpickr.min";
 
-
-
-
 $edcolor: red;
-
-
-
 
 body {
   height: 100%;
@@ -68,13 +62,13 @@ label {
 }
 
 [data-theme='light'] {
-  --bg-color: #F0DDBC;
+  --bg-color:#c4c1d4;
   --color: #3A4257;
 }
 
 [data-theme='dark'] {
   --bg-color: #3A4257;
-  --color: #F0DDBC;
+  --color: #c4c1d4;
 }
 
 .slider {

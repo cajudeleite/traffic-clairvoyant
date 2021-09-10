@@ -1,9 +1,22 @@
 .gchart {
   display:block;
   width:auto;
+  // background-color: rgba(230, 230, 230, 1);
   // margin: 0 auto !important;
 }
 
+.gchart-box {
+  // display:block;
+  // width:auto;
+  background-color: #e8e6f2;
+  box-shadow: -10px 5px 5px grey;
+  width: fit-content;
+  height: fit-content;
+  margin: 20px;
+  // width: 500px;
+  // height: 300px;
+  // margin: 0 auto !important;
+}
 .info-content {
   font-family: 'Cairo', sans-serif;
   .route-title {
