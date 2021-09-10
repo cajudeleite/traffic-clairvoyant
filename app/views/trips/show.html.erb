@@ -6,7 +6,7 @@
   <div class="text-center pt-3">
     <h2 class="text-center">Route: <%= @odr.name %></h2>
     <h2 class="text-center">Departure time: <%= @trip.time.to_i %>h</h2>
-    <div class="charts-flex">
+    <div class="charts-flex justify-content-center">
     <div class="gchart-box">
       <div class="gchart chart_div m-4"></div>
     </div>
@@ -18,7 +18,7 @@
   <div class="chart-box" data-route = "<%=@odr.name%>">
   <div class="routes">
     <h2 class="text-center route-title check-roads" data-road-destination = "<%=@odr.id%>">Check road status</h2>
-    <div class="charts-flex">
+    <div class="charts-flex justify-content-center">
       <% @graph_data_routes.each do |key, value| %>
       <% roads = []  %>
       <% @odr.roads.each do |road| roads << road.name end%>
@@ -37,13 +37,17 @@
 
 
 <div class="container">
-  <h2 class="text-center">Update your trip</h2>
-  <%= simple_form_for @trip do |f| %>
-    <%= f.input :time, collection: Trip::DEPARTURE_TIME, label: 'Departure Time' %>
-    <div class="text-center">
-     <%= f.submit class: 'button-light' %>
+  <div class="row justify-content-center">
+    <div class="col-sm-3">
+      <h2 class="text-center">Update your trip</h2>
+      <%= simple_form_for @trip do |f| %>
+        <%= f.input :time, collection: Trip::DEPARTURE_TIME, label: 'Departure Time' %>
+        <div class="text-center">
+        <%= f.submit class: 'button-light' %>
+        </div>
+      <% end  %>
     </div>
-  <% end  %>
+  </div>
 </div>
 
 
