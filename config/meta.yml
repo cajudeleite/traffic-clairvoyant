@@ -1,0 +1,5 @@
+meta_product_name: "Traffic Clairvoyant"
+meta_title: "Traffic Clairvoyant - No more traffic stress on holidays"
+meta_description: "A traffic predictor and organizer"
+meta_image: "background.png" # should exist in `app/assets/images/`
+twitter_account: "@cajudeleite"   # required for Twitter Cards
